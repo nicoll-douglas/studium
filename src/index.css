@@ -1,0 +1,13 @@
+@font-face {
+  font-family: Jost;
+  src: url(assets/fonts/Jost-variable-weight.ttf);
+}
+
+@font-face {
+  font-family: Nanum Pen;
+  src: url(assets/fonts/NanumPenScript-regular.ttf);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
