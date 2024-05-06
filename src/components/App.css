@@ -1,0 +1,15 @@
+body {
+  @apply min-h-dvh bg-LM-primary dark:bg-DM-primary text-LM-neutral dark:text-DM-neutral font-jost flex flex-col;
+}
+
+header {
+  @apply flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-10 shadow-none py-5;
+}
+
+a {
+  @apply hover:text-LM-accent-light dark:hover:text-DM-accent-light;
+}
+
+svg {
+  @apply fill-LM-neutral dark:fill-DM-neutral;
+}

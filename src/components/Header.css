@@ -1,0 +1,3 @@
+#desktop-menu a {
+  @apply cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light;
+}
