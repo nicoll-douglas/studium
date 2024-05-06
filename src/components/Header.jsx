@@ -22,7 +22,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="shadow-none transition-shadow duration-700 ease-in-out">
+    <header className="shadow-none transition-shadow duration-700 ease-in-out flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-10 py-5">
       <Logo />
       <nav className="lg:hidden" aria-label="Site" id="desktop-menu">
         <ul className="flex gap-8">

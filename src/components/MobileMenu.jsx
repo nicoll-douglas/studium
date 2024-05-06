@@ -5,7 +5,7 @@ export default function MobileMenu() {
   const [isHidden, setIsHidden] = useState(true);
 
   const transitionDuration = 500; // ms
-  const transitionDistance = 500; // px
+  const transitionDistance = 480; // px
 
   function handleOpen() {
     setIsHidden(!isHidden);
@@ -54,7 +54,7 @@ export default function MobileMenu() {
         id="site-menu"
         hidden={isHidden}
         style={{
-          transition: `transform ${transitionDuration}ms ease-in-out`,
+          transition: `transform ${transitionDuration}ms ease`,
           transform: `translateY(-${transitionDistance}px)`,
         }}
       >

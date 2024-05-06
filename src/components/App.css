@@ -1,11 +1,3 @@
-body {
-  @apply min-h-dvh bg-LM-primary dark:bg-DM-primary text-LM-neutral dark:text-DM-neutral font-jost flex flex-col;
-}
-
-header {
-  @apply flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-10 py-5;
-}
-
 a {
   @apply hover:text-LM-accent-light dark:hover:text-DM-accent-light;
 }
@@ -15,5 +7,5 @@ svg {
 }
 
 #root {
-  @apply min-h-dvh flex flex-col;
+  @apply min-h-dvh flex flex-col bg-LM-primary dark:bg-DM-primary text-LM-neutral dark:text-DM-neutral font-jost;
 }
