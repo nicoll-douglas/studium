@@ -49,7 +49,7 @@ export default function MobileMenu() {
         </svg>
       </button>
       <div
-        className="fixed w-dvw top-0 left-0 z-20 bg-LM-primary dark:bg-DM-primary rounded-b-3xl drop-shadow-2xl flex-col"
+        className="fixed w-dvw top-0 left-0 z-20 bg-LM-primary dark:bg-DM-primary rounded-b-3xl drop-shadow-2xl flex-col max-h-dvh overflow-scroll"
         role="menu"
         id="site-menu"
         hidden={isHidden}
