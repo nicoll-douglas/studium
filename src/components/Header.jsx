@@ -2,8 +2,9 @@ import Logo from "./Logo";
 import DarkModeButton from "./DarkModeButton";
 import MobileMenu from "./MobileMenu";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ hasNav }) {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (
@@ -22,49 +23,37 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="shadow-none transition-shadow duration-700 ease-in-out flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-10 py-5">
+    <header className="shadow-none transition-shadow duration-700 ease-in-out flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-20 py-5">
       <Logo />
-      <nav className="lg:hidden" aria-label="Site" id="desktop-menu">
-        <ul className="flex gap-8">
-          <li>
-            <a className="cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light">
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a className="cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light">
-              To Do List
-            </a>
-          </li>
-          <li>
-            <a className="cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light">
-              Notes
-            </a>
-          </li>
-          <li>
-            <a className="cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light">
-              Bookmarks
-            </a>
-          </li>
-          <li>
-            <a className="cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light">
-              Pomodoro Timer
-            </a>
-          </li>
-          <li>
-            <a className="cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light">
-              Calculator
-            </a>
-          </li>
-          <li>
-            <a className="cursor-pointer hover:text-LM-accent-light dark:hover:text-DM-accent-light">
-              Dictionary
-            </a>
-          </li>
-        </ul>
-      </nav>
+      {hasNav && (
+        <nav className="lg:hidden" aria-label="Site">
+          <ul className="flex gap-8">
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/to-do-list">To Do List</Link>
+            </li>
+            <li>
+              <Link to="/notes">Notes</Link>
+            </li>
+            <li>
+              <Link to="/bookmarks">Bookmarks</Link>
+            </li>
+            <li>
+              <Link to="/pomodoro-timer">Pomodoro Timer</Link>
+            </li>
+            <li>
+              <Link to="/calculator">Calculator</Link>
+            </li>
+            <li>
+              <Link to="/dictionary">Dictionary</Link>
+            </li>
+          </ul>
+        </nav>
+      )}
       <DarkModeButton />
-      <MobileMenu />
+      {hasNav && <MobileMenu />}
     </header>
   );
 }

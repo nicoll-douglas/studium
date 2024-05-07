@@ -4,8 +4,10 @@ import MenuItem from "./MenuItem";
 export default function MobileMenu() {
   const [isHidden, setIsHidden] = useState(true);
 
-  const transitionDuration = 500; // ms
-  const transitionDistance = 480; // px
+  const transition = {
+    duration: 500,
+    distance: 480,
+  };
 
   function handleOpen() {
     setIsHidden(!isHidden);
@@ -15,10 +17,10 @@ export default function MobileMenu() {
   }
 
   function handleClose() {
-    setTimeout(setIsHidden, transitionDuration, !isHidden);
+    setTimeout(setIsHidden, transition.duration, !isHidden);
     document.querySelector(
       "#site-menu"
-    ).style.transform = `translateY(-${transitionDistance}px)`;
+    ).style.transform = `translateY(-${transition.distance}px)`;
   }
 
   return (
@@ -54,8 +56,8 @@ export default function MobileMenu() {
         id="site-menu"
         hidden={isHidden}
         style={{
-          transition: `transform ${transitionDuration}ms ease`,
-          transform: `translateY(-${transitionDistance}px)`,
+          transition: `transform ${transition.duration}ms ease`,
+          transform: `translateY(-${transition.distance}px)`,
         }}
       >
         <div className="flex justify-between font-nanum-pen text-LM-accent-light dark:text-DM-accent-light text-3xl items-center pt-5 mb-2 pl-8 pr-6">
@@ -80,13 +82,13 @@ export default function MobileMenu() {
           </button>
         </div>
         <ul className="flex gap-8 lg:gap-0 lg:flex-col lg:mx-8 lg:mb-6">
-          <MenuItem variant="Dashboard" />
-          <MenuItem variant="To Do List" />
-          <MenuItem variant="Notes" />
-          <MenuItem variant="Bookmarks" />
-          <MenuItem variant="Pomodoro Timer" />
-          <MenuItem variant="Calculator" />
-          <MenuItem variant="Dictionary" />
+          <MenuItem variant="Dashboard" role="menuitem" />
+          <MenuItem variant="To Do List" role="menuitem" />
+          <MenuItem variant="Notes" role="menuitem" />
+          <MenuItem variant="Bookmarks" role="menuitem" />
+          <MenuItem variant="Pomodoro Timer" role="menuitem" />
+          <MenuItem variant="Calculator" role="menuitem" />
+          <MenuItem variant="Dictionary" role="menuitem" />
         </ul>
       </div>
     </nav>

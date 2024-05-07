@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
   return (
     <div className="flex-grow flex flex-col items-center justify-center">
@@ -37,9 +39,9 @@ export default function Hero() {
             <path d="m186 91-3 2-3 1c-1 1 1 3 3 2 2 0 2 0 2 2 0 3 2 3 3 0l3-3 2-1-2-2-2-1c0-3-3-2-3 0zm-45 7-5 77v6l7-1c15-1 40-7 40-10 0-1-1-1-9 1-10 3-27 6-32 6h-3v-7a2350 2350 0 0 0 2-72zm18 2-2 2c-2 0-4 2-3 3l3 1c2 0 2 0 2 3l1 4 2-4c0-3 0-4 3-4l2-1-2-2-3-2-2-2-1 2zm22 12c0 4 0 4-3 4-5 1-5 3 0 3 3 0 3 0 3 3l1 4c2 0 2-1 2-2 0-3 1-5 4-5 2-1 2-3-1-4-1 0-2-1-2-3-1-4-4-4-4 0z" />
             <path d="m164 131-2 2-2 2 2 2 2 2c0 2 2 2 3 0l3-3 2-2-2-1c-2 0-3-1-3-2l-1-2-2 2zm17 13s-1 2-3 2c-2 1-2 3 1 3 2 0 2 1 2 3 0 4 2 3 3-1 0-1 1-3 3-3 3-1 4-3 1-3l-3-1c0-2-3-2-4 0zm-30 1c0 1-1 2-3 2-3 1-4 3 0 4 2 0 3 1 3 2 0 2 2 1 3 0l2-2c3-1 2-3 0-4l-2-2c0-2-2-2-3 0zm13 12c0 2-2 3-3 3-2 1-2 3 1 3l1 3 2 2c1 1 2-1 2-2 0-3 1-3 4-3l3-1c0-1-1-2-3-2-3 0-4 0-4-2 0-3-2-3-3-1zm-62-48c0 2 3 3 7 3 7-1 6-3-1-3h-6zm0 6c-1 1-1 2 1 4 3 2 6 2 8 1 4-3 2-5-2-3-1 1-2 0-4-1l-3-1zm-4 22c-1 2 5 6 9 6s8-2 7-4h-5c-2 1-3 1-6-1-3-1-4-2-5-1zm-3 9 3 3c4 3 13 2 13 0 1-1 0-1-4-1l-7-1c-4-2-5-2-5-1zm0 26c0 2 5 4 8 4 5 0 10-2 10-4H95zm0 10c0 3 10 5 16 3 2-1 3-4 0-3h-11c-4-2-5-2-5 0z" />
           </svg>
-          <a
-            href=""
-            className="py-3 px-8 font-semibold rounded-xl bg-LM-accent-light text-white dark:text-black text-lg flex gap-2 items-center hover:bg-LM-accent-dark dark:bg-DM-accent-light dark:hover:bg-DM-accent-dark transition-colors duration-200 group max-h-fit self-start mx-auto lg:text-base lg:px-6 md:px-4 md:py-2 md:text-sm hover:text-white dark:hover:text-black"
+          <Link
+            to="/dashboard"
+            className="py-3 px-8 font-semibold rounded-xl bg-LM-accent-light text-white dark:text-black text-lg flex gap-2 items-center hover:bg-LM-accent-dark dark:bg-DM-accent-light dark:hover:bg-DM-accent-dark transition-colors duration-200 group max-h-fit self-start mx-auto lg:text-base lg:px-6 md:px-4 hover:text-white dark:hover:text-black"
           >
             Go to dashboard
             <svg
@@ -52,7 +54,7 @@ export default function Hero() {
             >
               <path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z" />
             </svg>
-          </a>
+          </Link>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             version="1.0"
