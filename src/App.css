@@ -1,0 +1,23 @@
+a {
+  @apply hover:text-LM-accent-light dark:hover:text-DM-accent-light;
+}
+
+svg {
+  @apply fill-LM-neutral dark:fill-DM-neutral;
+}
+
+#root {
+  @apply min-h-dvh flex flex-col bg-LM-primary dark:bg-DM-primary text-LM-neutral dark:text-DM-neutral font-jost;
+}
+
+:focus-visible {
+  @apply outline outline-red-600 outline-2;
+}
+
+nav a.active {
+  @apply text-LM-accent-light dark:text-DM-accent-light;
+}
+
+nav a.active svg {
+  @apply fill-LM-accent-light dark:fill-DM-accent-light;
+}
