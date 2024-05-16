@@ -4,6 +4,12 @@ import ListInput from "./components/ListInput";
 import ListItem from "./components/ListItem";
 import { useEffect } from "react";
 import NoItems from "./components/NoItems";
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 export default function ToDoList() {
   const [list, setList] = useImmer(() => {
@@ -42,6 +48,14 @@ export default function ToDoList() {
     });
   }
 
+  function handleDragEnd(e) {
+    const { active, over } = e;
+    if (active.id === over.id) return;
+    const originalPos = list.findIndex((element) => element.id === active.id);
+    const newPos = list.findIndex((element) => element.id === over.id);
+    setList((currentList) => arrayMove(currentList, originalPos, newPos));
+  }
+
   let rendered;
   if (list.length === 0) {
     rendered = <NoItems />;
@@ -63,13 +77,17 @@ export default function ToDoList() {
     <div className="flex flex-col gap-4 w-[500px] lg:w-[390px] sm:w-full">
       <Heading variant="To Do List" />
       <ListInput callback={handleNewItem} />
-      <ul
-        className="border border-LM-accent-light dark:border-DM-accent-light py-4 rounded-xl shadow-lg max-w-full flex-col"
-        id="to-do-list-items"
-        aria-label="To do list"
-      >
-        {rendered}
-      </ul>
+      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+        <SortableContext items={list} strategy={verticalListSortingStrategy}>
+          <ul
+            className="border border-LM-accent-light dark:border-DM-accent-light py-4 rounded-xl shadow-lg max-w-full flex-col"
+            id="to-do-list-items"
+            aria-label="To do list"
+          >
+            {rendered}
+          </ul>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 }

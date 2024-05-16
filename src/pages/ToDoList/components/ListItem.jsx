@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import TextareaAutosize from "react-textarea-autosize";
 
 export default function ListItem({
   content,
@@ -7,11 +9,15 @@ export default function ListItem({
   id,
 }) {
   const [text, setText] = useState(content);
-  const textareaRef = useRef(null);
-  useEffect(() => {
-    textareaRef.current.style.height = "auto";
-    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-  }, [text]);
+
+  const {
+    listeners,
+    setNodeRef,
+    transform,
+    setActivatorNodeRef,
+    isDragging,
+    transition,
+  } = useSortable({ id: id });
 
   function handleInput(e, id) {
     editCallback(e.target.value, id);
@@ -19,25 +25,38 @@ export default function ListItem({
   }
 
   return (
-    <li className="max-w-full text-wrap flex break-all relative px-4 py-1 items-start group/list-item">
+    <li
+      className={`rounded-md max-w-full text-wrap flex relative px-4 py-1 items-start group/list-item bg-LM-primary dark:bg-DM-primary ${
+        isDragging ? "z-50" : "z-10"
+      }`}
+      ref={setNodeRef}
+      style={{
+        transition,
+        transform: transform
+          ? `translate(${transform.x}px, ${transform.y}px)`
+          : "",
+      }}
+    >
       <button
         className="max-h-5 min-h-5 min-w-5 max-w-5 rounded-full border border-LM-accent-light dark:border-DM-accent-light cursor-pointer flex items-center justify-center group translate-y-[2px]"
         onClick={() => deleteCallback(id)}
       >
         <div className="max-h-2 min-h-2 max-w-2 min-w-2 rounded-full bg-LM-accent-light dark:bg-DM-accent-light invisible group-hover:visible group-focus:visible"></div>
       </button>
-      <textarea
-        className="bg-transparent ml-3 flex-grow cursor-text resize-none"
+      <TextareaAutosize
+        className="bg-transparent ml-3 flex-grow cursor-text resize-none break-words"
         value={text}
-        ref={textareaRef}
-        rows={1}
+        minRows={1}
         onInput={(e) => handleInput(e, id)}
         placeholder="Empty to do..."
         onKeyDown={(e) => {
-          if (e.key === "Enter") e.preventDefault();
+          if (e.key === "Enter") {
+            e.preventDefault();
+            e.target.blur();
+          }
         }}
-      ></textarea>
-      <button className="group ml-2">
+      ></TextareaAutosize>
+      <button className="group ml-2" ref={setActivatorNodeRef} {...listeners}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
