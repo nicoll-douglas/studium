@@ -1,33 +1,20 @@
-import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
 import { useEffect } from "react";
-import ErrorPage from "./pages/ErrorPage";
+
+import "./App.css";
+import Base from "./layouts/Base";
+import Home from "./pages/Home/Home";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import ToDoList from "./pages/ToDoList/ToDoList";
+import AppLayout from "./layouts/AppLayout";
+import mapToTitle from "./utils/titleMap";
 
 function App() {
   const location = useLocation();
   useEffect(() => {
     const currentTitle = document.title;
-    const appPaths = [
-      "/dashboard",
-      "/notes",
-      "/to-do-list",
-      "/calculator",
-      "/dictionary",
-      "/pomodoro-timer",
-      "/bookmarks",
-    ];
-    const pathname = location.pathname;
-
-    if (pathname === "/" || pathname === "/home") {
-      document.title = "Studium | The home of your on-the-fly study needs";
-    } else if (appPaths.some((path) => path === pathname)) {
-      document.title = "Studium | App";
-    } else {
-      document.title = "404 Page Not Found";
-    }
-
+    const mapping = mapToTitle(location.pathname);
+    document.title = mapping ? `Studium | ${mapping}` : "404 Page Not Found";
     return () => {
       document.title = currentTitle;
     };
@@ -35,18 +22,20 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/home" element={<Home />}></Route>
-      <Route element={<Layout />}>
-        <Route path="/dashboard"></Route>
-        <Route path="/notes"></Route>
-        <Route path="/to-do-list"></Route>
-        <Route path="/calculator"></Route>
-        <Route path="/dictionary"></Route>
-        <Route path="/pomodoro-timer"></Route>
-        <Route path="/bookmarks"></Route>
+      <Route element={<Base />}>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="*" element={<ErrorPage />}></Route>
+        <Route element={<AppLayout />}>
+          <Route path="/dashboard"></Route>
+          <Route path="/notes"></Route>
+          <Route path="/to-do-list" element={<ToDoList />}></Route>
+          <Route path="/calculator"></Route>
+          <Route path="/dictionary"></Route>
+          <Route path="/pomodoro-timer"></Route>
+          <Route path="/bookmarks"></Route>
+        </Route>
       </Route>
-      <Route path="*" element={<ErrorPage />}></Route>
     </Routes>
   );
 }

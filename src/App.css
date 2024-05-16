@@ -10,10 +10,6 @@ svg {
   @apply min-h-dvh flex flex-col bg-LM-primary dark:bg-DM-primary text-LM-neutral dark:text-DM-neutral font-jost;
 }
 
-:focus-visible {
-  @apply outline outline-red-600 outline-2;
-}
-
 nav a.active {
   @apply text-LM-accent-light dark:text-DM-accent-light;
 }
