@@ -55,7 +55,7 @@ export default function Header({ currentPage }) {
         </nav>
       )}
       <DarkModeButton />
-      {isHomePage && <MobileMenu />}
+      <MobileMenu display={isHomePage ? "lg:flex" : "sm:flex"} />
     </header>
   );
 }

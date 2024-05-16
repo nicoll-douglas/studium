@@ -1,15 +1,19 @@
-import { useState, useRef } from "react";
-
+import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import MenuItem from "../../MenuItem";
 import OpenMenuButton from "./OpenMenuButton";
 import CloseMenuButton from "./CloseMenuButton";
 
-export default function MobileMenu() {
+export default function MobileMenu({ display }) {
+  const location = useLocation();
   const [menu, setMenu] = useState({
     open: false,
     hidden: true,
   });
   const menuRef = useRef(null);
+  useEffect(() => {
+    setMenu({ open: false, hidden: true });
+  }, [location]);
 
   function handleToggle() {
     setMenu({
@@ -32,7 +36,7 @@ export default function MobileMenu() {
   }
 
   return (
-    <nav className="ml-3 lg:flex hidden" aria-label="Site">
+    <nav className={`ml-3 ${display} hidden`} aria-label="Site">
       <div
         className="w-dvw h-dvh bg-black opacity-40 fixed left-0 top-0"
         onClick={handleToggle}
@@ -40,7 +44,7 @@ export default function MobileMenu() {
       ></div>
       <OpenMenuButton onClick={handleToggle} aria-expanded={menu.open} />
       <section
-        className={`fixed w-dvw top-0 left-0 z-20 bg-LM-primary dark:bg-DM-primary drop-shadow-2xl rounded-b-3xl flex-col max-h-dvh overflow-scroll ${
+        className={`fixed w-dvw top-0 left-0 z-20 bg-LM-primary dark:bg-DM-primary drop-shadow-2xl rounded-b-3xl flex-col max-h-dvh overflow-y-scroll ${
           !menu.open ? "-translate-y-full" : ""
         }`}
         role="menu"
