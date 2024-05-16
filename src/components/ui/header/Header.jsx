@@ -1,31 +1,33 @@
-import Logo from "./Logo";
-import DarkModeButton from "./DarkModeButton";
-import MobileMenu from "./MobileMenu";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
-export default function Header({ hasNav }) {
+import Logo from "./components/Logo";
+import DarkModeButton from "./components/DarkModeButton";
+import MobileMenu from "./components/MobileMenu";
+
+export default function Header({ currentPage }) {
+  const headerRef = useRef(null);
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (
         document.body.scrollTop > 0 ||
         document.documentElement.scrollTop > 0
       ) {
-        document
-          .querySelector("header")
-          .classList.replace("shadow-none", "shadow-xl");
+        headerRef.current.classList.replace("shadow-none", "shadow-xl");
       } else {
-        document
-          .querySelector("header")
-          .classList.replace("shadow-xl", "shadow-none");
+        headerRef.current.classList.replace("shadow-xl", "shadow-none");
       }
     });
   }, []);
+  const isHomePage = currentPage === "/" || currentPage === "/home";
 
   return (
-    <header className="shadow-none transition-shadow duration-700 ease-in-out flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-20 py-5">
+    <header
+      className="shadow-none transition-shadow duration-700 ease-in-out flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-20 py-5"
+      ref={headerRef}
+    >
       <Logo />
-      {hasNav && (
+      {isHomePage && (
         <nav className="lg:hidden" aria-label="Site">
           <ul className="flex gap-8">
             <li>
@@ -53,7 +55,7 @@ export default function Header({ hasNav }) {
         </nav>
       )}
       <DarkModeButton />
-      {hasNav && <MobileMenu />}
+      {isHomePage && <MobileMenu />}
     </header>
   );
 }
