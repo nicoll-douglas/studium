@@ -1,12 +1,13 @@
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import AddButton from "../../../components/ui/buttons/AddButton";
 
-export default function ListInput({ callback }) {
-  const [value, setValue] = useState("");
+export default function ListInput({ newItemCallback }) {
+  const [text, setText] = useState("");
 
   function handleClick() {
-    callback(value);
-    setValue("");
+    newItemCallback(text);
+    setText("");
   }
 
   return (
@@ -14,8 +15,8 @@ export default function ListInput({ callback }) {
       <TextareaAutosize
         type="text"
         minRows={1}
-        value={value}
-        onInput={(e) => setValue(e.target.value)}
+        value={text}
+        onInput={(e) => setText(e.target.value)}
         className="bg-transparent p-4 pr-14 rounded-xl flex-grow resize-none"
         placeholder="Add a to do..."
         autoComplete="off"
@@ -26,22 +27,7 @@ export default function ListInput({ callback }) {
           }
         }}
       ></TextareaAutosize>
-      <button
-        className="absolute right-0 mx-4 group mt-4"
-        aria-label="add item to list"
-        onClick={handleClick}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 -960 960 960"
-          width="24"
-          aria-hidden="true"
-          className="fill-LM-accent-light group-hover:fill-LM-accent-dark dark:fill-DM-accent-light dark:group-hover:fill-DM-accent-dark"
-        >
-          <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-        </svg>
-      </button>
+      <AddButton onClick={handleClick} label="add item to list" />
     </div>
   );
 }

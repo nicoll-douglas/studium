@@ -1,59 +1,48 @@
 import { useImmer } from "use-immer";
-import Heading from "../../components/Heading";
-import ListInput from "./components/ListInput";
-import ListItem from "./components/ListItem";
 import { useEffect } from "react";
-import NoItems from "./components/NoItems";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
-  arrayMove,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+
+import Container from "../../components/ui/Container";
+import Heading from "../../components/ui/Heading";
+import ListInput from "./components/ListInput";
+import ListItem from "./components/ListItem";
+import NoItems from "./components/NoItems";
+import reorderList from "../../utils/reorderList";
 
 export default function ToDoList() {
   const [list, setList] = useImmer(() => {
     const storedList = localStorage.toDoList;
     return storedList ? JSON.parse(storedList) : [];
   });
+
   useEffect(() => {
     localStorage.toDoList = JSON.stringify(list);
   }, [list]);
 
-  function handleNewItem(data) {
-    setList((currentList) => {
-      return [
-        ...currentList,
-        {
-          text: data,
-          id: crypto.randomUUID(),
-        },
-      ];
-    });
+  function handleNewItem(text) {
+    setList([
+      ...list,
+      {
+        text,
+        id: crypto.randomUUID(),
+      },
+    ]);
   }
 
   function handleEdit(text, id) {
-    setList((currentList) => {
-      return currentList.map((listElement) => {
-        return listElement.id === id
-          ? { ...listElement, text: text }
-          : listElement;
-      });
-    });
+    setList(
+      list.map((listItem) => {
+        return listItem.id === id ? { ...listItem, text } : listItem;
+      })
+    );
   }
 
   function handleDelete(id) {
-    setList((currentList) => {
-      return currentList.filter((listElement) => listElement.id !== id);
-    });
-  }
-
-  function handleDragEnd(e) {
-    const { active, over } = e;
-    if (active.id === over.id) return;
-    const originalPos = list.findIndex((element) => element.id === active.id);
-    const newPos = list.findIndex((element) => element.id === over.id);
-    setList((currentList) => arrayMove(currentList, originalPos, newPos));
+    setList(list.filter((listElement) => listElement.id !== id));
   }
 
   let rendered;
@@ -74,10 +63,13 @@ export default function ToDoList() {
   }
 
   return (
-    <div className="flex flex-col gap-4 w-[500px] lg:w-[390px] sm:w-full">
+    <Container className="flex flex-col gap-4 w-[500px] lg:w-[390px] sm:w-full">
       <Heading variant="To Do List" />
-      <ListInput callback={handleNewItem} />
-      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+      <ListInput newItemCallback={handleNewItem} />
+      <DndContext
+        collisionDetection={closestCorners}
+        onDragEnd={(e) => reorderList(e, list, setList)}
+      >
         <SortableContext items={list} strategy={verticalListSortingStrategy}>
           <ul
             className="border border-LM-accent-light dark:border-DM-accent-light py-4 rounded-xl shadow-lg max-w-full flex-col"
@@ -88,6 +80,6 @@ export default function ToDoList() {
           </ul>
         </SortableContext>
       </DndContext>
-    </div>
+    </Container>
   );
 }

@@ -1,4 +1,4 @@
-import mapToIcon from "../utils/iconMap";
+import mapToIcon from "../../utils/iconMap";
 
 export default function Heading({ variant }) {
   const SVGComponent = mapToIcon(variant);

@@ -8,6 +8,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import ToDoList from "./pages/ToDoList/ToDoList";
 import AppLayout from "./layouts/AppLayout";
 import mapToTitle from "./utils/titleMap";
+import Notes from "./pages/Notes/Notes";
 
 function App() {
   const location = useLocation();
@@ -28,7 +29,7 @@ function App() {
         <Route path="*" element={<ErrorPage />}></Route>
         <Route element={<AppLayout />}>
           <Route path="/dashboard"></Route>
-          <Route path="/notes"></Route>
+          <Route path="/notes" element={<Notes />}></Route>
           <Route path="/to-do-list" element={<ToDoList />}></Route>
           <Route path="/calculator"></Route>
           <Route path="/dictionary"></Route>

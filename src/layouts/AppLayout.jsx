@@ -21,7 +21,7 @@ export default function AppLayout() {
           <MenuItem variant="Dictionary" role="listitem" />
         </ul>
       </nav>
-      <div className="flex-grow flex justify-center px-4 py-24 ml-[234px] lg:ml-[218px] sm:ml-0">
+      <div className="flex-grow flex flex-col items-center px-4 py-24 ml-[234px] lg:ml-[218px] sm:ml-0 overflow-hidden">
         <Outlet />
       </div>
     </div>
