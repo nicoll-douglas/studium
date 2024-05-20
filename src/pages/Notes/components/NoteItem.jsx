@@ -9,9 +9,9 @@ import { useState } from "react";
 import { useImmer } from "use-immer";
 import { useSortable } from "@dnd-kit/sortable";
 
-export default function NoteItem({ deleteCallback, saveCallback, content }) {
+export default function NoteItem({ deleterCallback, updaterCallback, data }) {
   const [modal, setModal] = useState(false);
-  const [data, setData] = useImmer(content);
+  const [noteData, setNoteData] = useImmer(data);
 
   const {
     listeners,
@@ -20,22 +20,25 @@ export default function NoteItem({ deleteCallback, saveCallback, content }) {
     setActivatorNodeRef,
     isDragging,
     transition,
-  } = useSortable({ id: content.id });
+  } = useSortable({ id: noteData.id });
 
   function handleDelete() {
-    deleteCallback(data);
+    deleterCallback(noteData.id);
     setModal(false);
   }
 
   function handleSave() {
-    saveCallback(data);
+    updaterCallback(noteData.id, {
+      title: noteData.title,
+      text: noteData.text,
+    });
     setModal(false);
   }
 
   function handleInput(e, type) {
     const newData = { ...data };
     newData[type] = e.target.value;
-    setData(newData);
+    setNoteData(newData);
   }
 
   return (
@@ -60,7 +63,7 @@ export default function NoteItem({ deleteCallback, saveCallback, content }) {
             className="bg-transparent text-lg text-ellipsis text-LM-accent-light dark:text-DM-accent-light"
             placeholder="Title..."
             disabled={!modal}
-            value={data.title}
+            value={noteData.title}
             onInput={(e) => handleInput(e, "title")}
           />
           <TextareaAutosize
@@ -69,7 +72,7 @@ export default function NoteItem({ deleteCallback, saveCallback, content }) {
             minRows={4}
             maxRows={modal ? 9999 : 4}
             disabled={!modal}
-            value={data.text}
+            value={noteData.text}
             onInput={(e) => handleInput(e, "text")}
           ></TextareaAutosize>
         </div>

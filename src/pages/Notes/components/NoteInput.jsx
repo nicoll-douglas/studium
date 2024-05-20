@@ -2,7 +2,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import AddButton from "../../../components/ui/buttons/AddButton";
 import { useState } from "react";
 
-export default function NoteInput({ newItemCallback }) {
+export default function NoteInput({ createrCallback }) {
   const [data, setData] = useState({ text: "", title: "" });
 
   function handleInput(e, type) {
@@ -12,7 +12,7 @@ export default function NoteInput({ newItemCallback }) {
   }
 
   function handleClick() {
-    newItemCallback(data);
+    createrCallback(data);
     setData({ text: "", title: "" });
   }
 

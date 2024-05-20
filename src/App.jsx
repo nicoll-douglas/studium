@@ -9,6 +9,7 @@ import ToDoList from "./pages/ToDoList/ToDoList";
 import AppLayout from "./layouts/AppLayout";
 import mapToTitle from "./utils/titleMap";
 import Notes from "./pages/Notes/Notes";
+import Bookmarks from "./pages/Bookmarks/Bookmarks";
 
 function App() {
   const location = useLocation();
@@ -24,17 +25,17 @@ function App() {
   return (
     <Routes>
       <Route element={<Base />}>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="*" element={<ErrorPage />}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="*" element={<ErrorPage />} />
         <Route element={<AppLayout />}>
-          <Route path="/dashboard"></Route>
-          <Route path="/notes" element={<Notes />}></Route>
-          <Route path="/to-do-list" element={<ToDoList />}></Route>
-          <Route path="/calculator"></Route>
-          <Route path="/dictionary"></Route>
-          <Route path="/pomodoro-timer"></Route>
-          <Route path="/bookmarks"></Route>
+          <Route path="/dashboard" />
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/to-do-list" element={<ToDoList />} />
+          <Route path="/calculator" />
+          <Route path="/dictionary" />
+          <Route path="/pomodoro-timer" />
+          <Route path="/bookmarks" element={<Bookmarks />} />
         </Route>
       </Route>
     </Routes>

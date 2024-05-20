@@ -1,5 +1,3 @@
-import { useImmer } from "use-immer";
-import { useEffect } from "react";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -12,38 +10,10 @@ import ListInput from "./components/ListInput";
 import ListItem from "./components/ListItem";
 import NoItems from "./components/NoItems";
 import reorderList from "../../utils/reorderList";
+import useCRUD from "../../hooks/useCRUD";
 
 export default function ToDoList() {
-  const [list, setList] = useImmer(() => {
-    const storedList = localStorage.toDoList;
-    return storedList ? JSON.parse(storedList) : [];
-  });
-
-  useEffect(() => {
-    localStorage.toDoList = JSON.stringify(list);
-  }, [list]);
-
-  function handleNewItem(text) {
-    setList([
-      ...list,
-      {
-        text,
-        id: crypto.randomUUID(),
-      },
-    ]);
-  }
-
-  function handleEdit(text, id) {
-    setList(
-      list.map((listItem) => {
-        return listItem.id === id ? { ...listItem, text } : listItem;
-      })
-    );
-  }
-
-  function handleDelete(id) {
-    setList(list.filter((listElement) => listElement.id !== id));
-  }
+  const [list, setList, operations] = useCRUD("toDoList");
 
   let rendered;
   if (list.length === 0) {
@@ -52,11 +22,10 @@ export default function ToDoList() {
     rendered = list.map((listElement) => {
       return (
         <ListItem
-          content={listElement.text}
+          data={listElement}
           key={listElement.id}
-          id={listElement.id}
-          editCallback={handleEdit}
-          deleteCallback={handleDelete}
+          updaterCallback={operations.update}
+          deleterCallback={operations.remove}
         />
       );
     });
@@ -65,7 +34,7 @@ export default function ToDoList() {
   return (
     <Container className="flex flex-col gap-4 w-[500px] lg:w-[390px] sm:w-full">
       <Heading variant="To Do List" />
-      <ListInput newItemCallback={handleNewItem} />
+      <ListInput createrCallback={operations.create} />
       <DndContext
         collisionDetection={closestCorners}
         onDragEnd={(e) => reorderList(e, list, setList)}

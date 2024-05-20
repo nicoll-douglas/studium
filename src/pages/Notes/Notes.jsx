@@ -5,42 +5,12 @@ import NoteItem from "./components/NoteItem";
 import reorderList from "../../utils/reorderList";
 import NoNotes from "./components/NoNotes";
 
-import { useEffect, useState } from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
+import useCRUD from "../../hooks/useCRUD";
 
 export default function Notes() {
-  const [notes, setNotes] = useState(() => {
-    const storedNotes = localStorage.notes;
-    return storedNotes ? JSON.parse(storedNotes) : [];
-  });
-
-  useEffect(() => {
-    localStorage.notes = JSON.stringify(notes);
-  }, [notes]);
-
-  function handleSave({ id, text, title }) {
-    setNotes(
-      notes.map((note) => {
-        return note.id === id ? { ...note, text, title } : note;
-      })
-    );
-  }
-
-  function handleDelete({ id }) {
-    setNotes(notes.filter((note) => note.id !== id));
-  }
-
-  function handleNewNote({ title, text }) {
-    setNotes([
-      ...notes,
-      {
-        id: crypto.randomUUID(),
-        title,
-        text,
-      },
-    ]);
-  }
+  const [notes, setNotes, operations] = useCRUD("notes");
 
   let rendered;
   if (notes.length === 0) {
@@ -49,10 +19,10 @@ export default function Notes() {
     rendered = notes.map((note) => {
       return (
         <NoteItem
-          content={note}
+          data={note}
           key={note.id}
-          saveCallback={handleSave}
-          deleteCallback={handleDelete}
+          updaterCallback={operations.update}
+          deleterCallback={operations.remove}
         />
       );
     });
@@ -62,7 +32,7 @@ export default function Notes() {
     <>
       <Container>
         <Heading variant="Notes" />
-        <NoteInput newItemCallback={handleNewNote} />
+        <NoteInput createrCallback={operations.create} />
       </Container>
       <DndContext
         collisionDetection={closestCenter}
