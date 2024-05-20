@@ -1,26 +1,59 @@
 import Heading from "../../components/ui/Heading";
 import Container from "../../components/ui/Container";
-import AddButton from "../../components/ui/buttons/AddButton";
+import BookmarkInput from "./components/BookmarkInput";
+import Bookmark from "./components/Bookmark";
+import NoBookmarks from "./components/NoBookmarks";
+import useCRUD from "../../hooks/useCRUD";
+import reorderList from "../../utils/reorderList";
+
+import { DndContext, closestCorners } from "@dnd-kit/core";
+import {
+  verticalListSortingStrategy,
+  SortableContext,
+} from "@dnd-kit/sortable";
 
 export default function Bookmarks() {
+  const [bookmarks, setBookmarks, operations] = useCRUD("bookmarks");
+
+  let rendered;
+  if (bookmarks.length === 0) {
+    rendered = <NoBookmarks />;
+  } else {
+    rendered = bookmarks.map((bookmark) => {
+      return (
+        <Bookmark
+          key={bookmark.id}
+          data={bookmark}
+          updaterCallback={operations.update}
+          deleterCallback={operations.remove}
+          bookmarks={bookmarks}
+          setBookmarks={setBookmarks}
+        />
+      );
+    });
+  }
+
   return (
     <Container>
       <Heading variant="Bookmarks" />
-      <div className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative">
-        <div className="p-4 pr-14 rounded-xl flex-grow flex flex-col gap-2">
-          <input
-            type="text"
-            placeholder="Name"
-            className="bg-transparent w-full"
-          />
-          <input
-            className="bg-transparent w-full"
-            placeholder="URL"
-            type="text"
-          />
-        </div>
-        <AddButton label="add note" />
-      </div>
+      <BookmarkInput createrCallback={operations.create} />
+      <DndContext
+        collisionDetection={closestCorners}
+        onDragEnd={(e) => reorderList(e, bookmarks, setBookmarks)}
+      >
+        <SortableContext
+          items={bookmarks}
+          strategy={verticalListSortingStrategy}
+        >
+          <ul
+            className="border border-LM-accent-light dark:border-DM-accent-light py-4 rounded-xl shadow-lg max-w-full flex-col"
+            id="to-do-list-items"
+            aria-label="To do list"
+          >
+            {rendered}
+          </ul>
+        </SortableContext>
+      </DndContext>
     </Container>
   );
 }

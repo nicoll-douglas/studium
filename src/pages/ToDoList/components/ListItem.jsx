@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { useSortable } from "@dnd-kit/sortable";
 import TextareaAutosize from "react-textarea-autosize";
 import DragButton from "../../../components/ui/buttons/DragButton";
 
+import { useSortable } from "@dnd-kit/sortable";
+import { useImmer } from "use-immer";
+
 export default function ListItem({ data, updaterCallback, deleterCallback }) {
-  const [listItemData, setListItemData] = useState(data);
+  const [listItemData, setListItemData] = useImmer(data);
 
   const {
     listeners,
@@ -23,7 +24,7 @@ export default function ListItem({ data, updaterCallback, deleterCallback }) {
 
   return (
     <li
-      className={`rounded-md max-w-full text-wrap flex relative px-4 py-1 items-start group/list-listItemData bg-LM-primary dark:bg-DM-primary ${
+      className={`rounded-md max-w-full text-wrap flex relative px-4 py-1 items-start group/list-item bg-LM-primary dark:bg-DM-primary ${
         isDragging ? "z-50 shadow-2xl" : "z-10"
       }`}
       ref={setNodeRef}
@@ -55,7 +56,7 @@ export default function ListItem({ data, updaterCallback, deleterCallback }) {
       ></TextareaAutosize>
       <DragButton
         ref={setActivatorNodeRef}
-        visibilityTrigger="group-hover/list-listItemData:visible"
+        visibilityTrigger="group-hover/list-item:visible"
         hidden={false}
         {...listeners}
       />
