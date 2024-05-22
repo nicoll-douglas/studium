@@ -1,0 +1,11 @@
+#timer-buttons button {
+  @apply w-full aspect-square border-2 border-LM-accent-light rounded-md flex items-center justify-center hover:border-LM-accent-dark dark:border-DM-accent-light dark:hover:border-DM-accent-dark transition-colors duration-200;
+}
+
+#timer-buttons button[aria-pressed="true"] {
+  @apply border-LM-accent-dark dark:border-DM-accent-dark;
+}
+
+#timer-buttons button svg {
+  @apply fill-LM-neutral dark:fill-DM-neutral size-10 sm:size-12 xs:size-8;
+}

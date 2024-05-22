@@ -20,6 +20,7 @@ export default function ListInput({ createrCallback }) {
         className="bg-transparent p-4 pr-14 rounded-xl flex-grow resize-none"
         placeholder="Add a to do..."
         autoComplete="off"
+        spellCheck={false}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();

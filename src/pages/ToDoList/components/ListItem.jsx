@@ -46,6 +46,7 @@ export default function ListItem({ data, updaterCallback, deleterCallback }) {
         value={listItemData.text}
         minRows={1}
         onInput={handleInput}
+        spellCheck={false}
         placeholder="Empty to do..."
         onKeyDown={(e) => {
           if (e.key === "Enter") {

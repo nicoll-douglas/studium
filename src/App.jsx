@@ -10,6 +10,7 @@ import AppLayout from "./layouts/AppLayout";
 import mapToTitle from "./utils/titleMap";
 import Notes from "./pages/Notes/Notes";
 import Bookmarks from "./pages/Bookmarks/Bookmarks";
+import PomodoroTimer from "./pages/PomodoroTimer/PomodoroTimer";
 
 function App() {
   const location = useLocation();
@@ -34,7 +35,7 @@ function App() {
           <Route path="/to-do-list" element={<ToDoList />} />
           <Route path="/calculator" />
           <Route path="/dictionary" />
-          <Route path="/pomodoro-timer" />
+          <Route path="/pomodoro-timer" element={<PomodoroTimer />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
         </Route>
       </Route>
