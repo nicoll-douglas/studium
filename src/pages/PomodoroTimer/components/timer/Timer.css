@@ -7,13 +7,11 @@
 }
 
 #timer-buttons button svg {
-  @apply fill-LM-neutral dark:fill-DM-neutral size-10 sm:size-12 xs:size-8;
+  @apply fill-LM-neutral dark:fill-DM-neutral size-10 lg:size-8;
 }
 
 .fullscreen {
-  min-height: calc(100% - 76px);
-  height: calc(100% - 76px);
-  @apply fixed left-0 w-full z-40 bg-LM-primary dark:bg-DM-primary top-[76px] pb-[76px] items-center justify-center p-4;
+  @apply fixed left-0 w-full z-50 bg-LM-primary dark:bg-DM-primary top-0 h-full items-center justify-center p-4;
 }
 
 .fullscreen-button {
