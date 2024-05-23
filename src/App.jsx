@@ -11,6 +11,7 @@ import mapToTitle from "./utils/titleMap";
 import Notes from "./pages/Notes/Notes";
 import Bookmarks from "./pages/Bookmarks/Bookmarks";
 import PomodoroTimer from "./pages/PomodoroTimer/PomodoroTimer";
+import Calculator from "./pages/Calculator/Calculator";
 
 function App() {
   const location = useLocation();
@@ -34,7 +35,7 @@ function App() {
           <Route path="/dashboard" />
           <Route path="/notes" element={<Notes />} />
           <Route path="/to-do-list" element={<ToDoList />} />
-          <Route path="/calculator" />
+          <Route path="/calculator" element={<Calculator />} />
           <Route path="/dictionary" />
           <Route path="/pomodoro-timer" element={<PomodoroTimer />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
