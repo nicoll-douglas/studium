@@ -10,17 +10,17 @@ export default function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (
-        document.body.scrollTop > 0 ||
-        document.documentElement.scrollTop > 0
-      ) {
-        headerRef.current.classList.replace("shadow-none", "shadow-xl");
-      } else {
-        headerRef.current.classList.replace("shadow-xl", "shadow-none");
-      }
-    });
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  function handleScroll() {
+    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+      headerRef.current.classList.replace("shadow-none", "shadow-xl");
+    } else {
+      headerRef.current.classList.replace("shadow-xl", "shadow-none");
+    }
+  }
 
   const isHomePage = location.pathname === "/" || location.pathname === "/home";
 

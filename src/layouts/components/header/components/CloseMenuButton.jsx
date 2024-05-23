@@ -1,11 +1,11 @@
-export default function closeMenuButton({ onClick, ariaExpanded }) {
+export default function closeMenuButton({ onClick, expanded }) {
   return (
     <button
       className="group"
       aria-label="Close menu"
       aria-controls="site-menu"
       onClick={onClick}
-      aria-expanded={ariaExpanded}
+      aria-expanded={expanded}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

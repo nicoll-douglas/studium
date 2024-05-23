@@ -1,4 +1,4 @@
-export default function OpenMenuButton({ onClick, ariaExpanded }) {
+export default function OpenMenuButton({ onClick, expanded }) {
   return (
     <button
       className="group relative"
@@ -6,7 +6,7 @@ export default function OpenMenuButton({ onClick, ariaExpanded }) {
       aria-haspopup="menu"
       aria-controls="site-menu"
       onClick={onClick}
-      aria-expanded={ariaExpanded}
+      aria-expanded={expanded}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
