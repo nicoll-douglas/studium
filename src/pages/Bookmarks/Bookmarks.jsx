@@ -21,14 +21,7 @@ export default function Bookmarks() {
   } else {
     rendered = bookmarks.map((bookmark) => {
       return (
-        <Bookmark
-          key={bookmark.id}
-          data={bookmark}
-          updaterCallback={operations.update}
-          deleterCallback={operations.remove}
-          bookmarks={bookmarks}
-          setBookmarks={setBookmarks}
-        />
+        <Bookmark key={bookmark.id} data={bookmark} operations={operations} />
       );
     });
   }
@@ -36,7 +29,7 @@ export default function Bookmarks() {
   return (
     <Container>
       <Heading variant="Bookmarks" />
-      <BookmarkInput createrCallback={operations.create} />
+      <BookmarkInput operations={operations} />
       <DndContext
         collisionDetection={closestCorners}
         onDragEnd={(e) => reorderList(e, bookmarks, setBookmarks)}

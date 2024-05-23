@@ -4,11 +4,16 @@ import SaveButton from "../../../components/ui/buttons/SaveButton";
 import DeleteButton from "../../../components/ui/buttons/DeleteButton";
 
 import { useEffect, useRef, useState } from "react";
-import { useImmer } from "use-immer";
 import { useSortable } from "@dnd-kit/sortable";
+import PropTypes from "prop-types";
 
-export default function Bookmark({ updaterCallback, deleterCallback, data }) {
-  const [bookmarkData, setBookmarkData] = useImmer(data);
+Bookmark.propTypes = {
+  operations: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+export default function Bookmark({ operations, data }) {
+  const [bookmarkData, setBookmarkData] = useState(data);
   const [editing, setEditing] = useState(false);
   const bookmarkNameInputRef = useRef(null);
 
@@ -28,7 +33,7 @@ export default function Bookmark({ updaterCallback, deleterCallback, data }) {
   }, [editing]);
 
   function handleSave() {
-    updaterCallback(bookmarkData.id, {
+    operations.update(bookmarkData.id, {
       name: bookmarkData.name,
       URL: bookmarkData.URL,
     });
@@ -102,7 +107,7 @@ export default function Bookmark({ updaterCallback, deleterCallback, data }) {
         <DeleteButton
           visible={false}
           visibilityTrigger="group-hover/bookmark:visible"
-          onClick={() => deleterCallback(bookmarkData.id)}
+          onClick={() => operations.remove(bookmarkData.id)}
         />
         <DragButton
           ref={setActivatorNodeRef}

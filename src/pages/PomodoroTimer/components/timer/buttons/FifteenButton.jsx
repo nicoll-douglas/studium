@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+FifteenButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  pressed: PropTypes.bool.isRequired,
+};
+
 export default function FifteenButton({ onClick, pressed }) {
   return (
     <button

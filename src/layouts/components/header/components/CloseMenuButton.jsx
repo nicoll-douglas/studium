@@ -1,4 +1,11 @@
-export default function closeMenuButton({ onClick, expanded }) {
+import PropTypes from "prop-types";
+
+CloseMenuButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  expanded: PropTypes.bool.isRequired,
+};
+
+export default function CloseMenuButton({ onClick, expanded }) {
   return (
     <button
       className="group"

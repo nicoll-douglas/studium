@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+PomodoroButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  pressed: PropTypes.bool.isRequired,
+};
+
 export default function PomodoroButton({ pressed, onClick }) {
   return (
     <button

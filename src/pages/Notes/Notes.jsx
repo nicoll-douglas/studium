@@ -4,10 +4,10 @@ import NoteInput from "./components/NoteInput";
 import NoteItem from "./components/NoteItem";
 import reorderList from "../../utils/reorderList";
 import NoNotes from "./components/NoNotes";
+import useCRUD from "../../hooks/useCRUD";
 
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
-import useCRUD from "../../hooks/useCRUD";
 
 export default function Notes() {
   const [notes, setNotes, operations] = useCRUD("notes");
@@ -17,14 +17,7 @@ export default function Notes() {
     rendered = <NoNotes />;
   } else {
     rendered = notes.map((note) => {
-      return (
-        <NoteItem
-          data={note}
-          key={note.id}
-          updaterCallback={operations.update}
-          deleterCallback={operations.remove}
-        />
-      );
+      return <NoteItem data={note} key={note.id} operations={operations} />;
     });
   }
 
@@ -32,7 +25,7 @@ export default function Notes() {
     <>
       <Container>
         <Heading variant="Notes" />
-        <NoteInput createrCallback={operations.create} />
+        <NoteInput operations={operations} />
       </Container>
       <DndContext
         collisionDetection={closestCenter}

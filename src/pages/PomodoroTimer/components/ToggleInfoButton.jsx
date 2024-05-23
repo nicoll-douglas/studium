@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+ToggleInfoButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  expanded: PropTypes.bool.isRequired,
+};
+
 export default function ToggleInfoButton({ onClick, expanded }) {
   return (
     <button

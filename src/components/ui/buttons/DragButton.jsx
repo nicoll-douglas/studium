@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import PropTypes from "prop-types";
 
 const DragButton = forwardRef(({ visibilityTrigger, hidden, ...rest }, ref) => {
   return (
@@ -16,6 +17,11 @@ const DragButton = forwardRef(({ visibilityTrigger, hidden, ...rest }, ref) => {
     </button>
   );
 });
+
+DragButton.propTypes = {
+  visibilityTrigger: PropTypes.string,
+  hidden: PropTypes.bool.isRequired,
+};
 
 DragButton.displayName = "DragButton";
 export default DragButton;

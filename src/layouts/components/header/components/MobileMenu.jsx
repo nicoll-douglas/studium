@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import MenuItem from "../../../../components/ui/MenuItem";
 import OpenMenuButton from "./OpenMenuButton";
 import CloseMenuButton from "./CloseMenuButton";
+
+MobileMenu.propTypes = {
+  display: PropTypes.string.isRequired,
+};
 
 export default function MobileMenu({ display }) {
   const location = useLocation();

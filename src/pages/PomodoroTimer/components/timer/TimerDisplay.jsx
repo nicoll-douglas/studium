@@ -1,3 +1,9 @@
+import PropTypes from "prop-types";
+
+TimerDisplay.propTypes = {
+  timeLeft: PropTypes.number.isRequired,
+};
+
 export default function TimerDisplay({ timeLeft }) {
   const minutesLeft = Math.floor(timeLeft / 60);
   const secondsLeft = timeLeft % 60;

@@ -1,4 +1,9 @@
 import mapToIcon from "../../utils/iconMap";
+import PropTypes from "prop-types";
+
+Heading.propTypes = {
+  variant: PropTypes.string.isRequired,
+};
 
 export default function Heading({ variant }) {
   const SVGComponent = mapToIcon(variant);

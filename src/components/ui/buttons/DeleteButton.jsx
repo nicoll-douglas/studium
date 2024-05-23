@@ -1,3 +1,11 @@
+import PropTypes from "prop-types";
+
+DeleteButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  visibilityTrigger: PropTypes.string,
+  visible: PropTypes.bool.isRequired,
+};
+
 export default function DeleteButton({ onClick, visibilityTrigger, visible }) {
   return (
     <button className="group" onClick={onClick}>

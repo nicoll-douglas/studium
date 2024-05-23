@@ -1,5 +1,11 @@
 import { NavLink } from "react-router-dom";
 import mapToIcon from "../../utils/iconMap";
+import PropTypes from "prop-types";
+
+MenuItem.propTypes = {
+  variant: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+};
 
 export default function MenuItem({ variant, role }) {
   const SVGComponent = mapToIcon(variant);

@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+OpenMenuButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  expanded: PropTypes.bool.isRequired,
+};
+
 export default function OpenMenuButton({ onClick, expanded }) {
   return (
     <button

@@ -1,11 +1,16 @@
 import { useState } from "react";
 import AddButton from "../../../components/ui/buttons/AddButton";
+import PropTypes from "prop-types";
 
-export default function BookmarkInput({ createrCallback }) {
+BookmarkInput.propTypes = {
+  operations: PropTypes.object.isRequired,
+};
+
+export default function BookmarkInput({ operations }) {
   const [data, setData] = useState({ name: "", URL: "" });
 
   function handleAdd() {
-    createrCallback({ name: data.name, URL: data.URL, pinned: false });
+    operations.create({ name: data.name, URL: data.URL, pinned: false });
     setData({ name: "", URL: "" });
   }
 

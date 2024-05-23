@@ -1,3 +1,9 @@
+import PropTypes from "prop-types";
+
+SkipButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
+
 export default function SkipButton({ onClick }) {
   return (
     <button title="Skip timer" onClick={onClick}>

@@ -1,3 +1,9 @@
+import PropTypes from "prop-types";
+
+InfoParagraph.propTypes = {
+  hidden: PropTypes.bool.isRequired,
+};
+
 export default function InfoParagraph({ hidden }) {
   return (
     <section hidden={hidden}>

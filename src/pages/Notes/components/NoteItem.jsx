@@ -6,12 +6,17 @@ import SaveButton from "../../../components/ui/buttons/SaveButton";
 import "./NoteItem.css";
 
 import { useState } from "react";
-import { useImmer } from "use-immer";
 import { useSortable } from "@dnd-kit/sortable";
+import PropTypes from "prop-types";
 
-export default function NoteItem({ deleterCallback, updaterCallback, data }) {
+NoteItem.propTypes = {
+  operations: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+export default function NoteItem({ operations, data }) {
   const [modal, setModal] = useState(false);
-  const [noteData, setNoteData] = useImmer(data);
+  const [noteData, setNoteData] = useState(data);
 
   const {
     listeners,
@@ -23,12 +28,12 @@ export default function NoteItem({ deleterCallback, updaterCallback, data }) {
   } = useSortable({ id: noteData.id });
 
   function handleDelete() {
-    deleterCallback(noteData.id);
+    operations.remove(noteData.id);
     setModal(false);
   }
 
   function handleSave() {
-    updaterCallback(noteData.id, {
+    operations.update(noteData.id, {
       title: noteData.title,
       text: noteData.text,
     });

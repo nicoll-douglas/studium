@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+ToggleTimerButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  pressed: PropTypes.bool.isRequired,
+};
+
 export default function ToggleTimerButton({ pressed, onClick }) {
   return (
     <button title="Start timer" aria-pressed={pressed} onClick={onClick}>

@@ -1,3 +1,11 @@
+import PropTypes from "prop-types";
+
+EditButton.propTypes = {
+  visibilityTrigger: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  hidden: PropTypes.bool.isRequired,
+};
+
 export default function EditButton({ visibilityTrigger, onClick, hidden }) {
   return (
     <button className={hidden ? "hidden" : "group"} onClick={onClick}>

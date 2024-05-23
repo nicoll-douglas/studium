@@ -14,6 +14,7 @@ import PomodoroTimer from "./pages/PomodoroTimer/PomodoroTimer";
 
 function App() {
   const location = useLocation();
+
   useEffect(() => {
     const currentTitle = document.title;
     const mapping = mapToTitle(location.pathname);

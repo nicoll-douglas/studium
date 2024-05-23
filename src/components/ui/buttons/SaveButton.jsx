@@ -1,3 +1,11 @@
+import PropTypes from "prop-types";
+
+SaveButton.propTypes = {
+  hidden: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  visibilityTrigger: PropTypes.string,
+};
+
 export default function SaveButton({ hidden, onClick, visibilityTrigger }) {
   return (
     <button className={hidden ? "hidden" : "group"} onClick={onClick}>

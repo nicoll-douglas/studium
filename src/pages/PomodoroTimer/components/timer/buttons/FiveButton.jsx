@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+FiveButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  pressed: PropTypes.bool.isRequired,
+};
+
 export default function FiveButton({ onClick, pressed }) {
   return (
     <button

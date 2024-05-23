@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+FullscreenButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  pressed: PropTypes.bool.isRequired,
+};
+
 export default function FullscreenButton({ onClick, pressed }) {
   return (
     <button title="Toggle fullscreen" aria-pressed={pressed} onClick={onClick}>
