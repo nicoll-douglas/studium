@@ -15,6 +15,7 @@ export default function Timer() {
     active: false,
     pomodoroNumber: 1,
     timeLeft: 25 * 60,
+    fullscreen: false,
   });
 
   const audioRef = useRef(null);
@@ -31,12 +32,13 @@ export default function Timer() {
     }
 
     setTimer({
+      fullscreen: timer.fullscreen,
       active: false,
       pomodoroNumber,
       minutes,
       timeLeft: minutes * 60,
     });
-  }, [timer]);
+  }, [timer.fullscreen, timer.pomodoroNumber, timer.minutes]);
 
   useEffect(() => {
     if (timer.active) {
@@ -59,7 +61,12 @@ export default function Timer() {
   }
 
   return (
-    <section className="flex flex-col gap-4 relative" aria-label="timer">
+    <section
+      className={`flex flex-col gap-4 xs:items-center ${
+        timer.fullscreen ? "fullscreen" : "relative"
+      }`}
+      aria-label="timer"
+    >
       <audio ref={audioRef}>
         <source
           src="./timer-end.mp3"
@@ -68,9 +75,9 @@ export default function Timer() {
           className="sr-only"
         />
       </audio>
-      <TimerDisplay timeLeft={timer.timeLeft} />
+      <TimerDisplay timeLeft={timer.timeLeft} fullscreen={timer.fullscreen} />
       <ul
-        className="w-full grid grid-cols-6 gap-3 md:gap-2"
+        className={`w-full grid grid-cols-6 gap-3 md:gap-2 xs:grid-cols-3 xs:grid-rows-2 xs:w-fit`}
         id="timer-buttons"
         aria-label="timer buttons"
       >
@@ -95,14 +102,22 @@ export default function Timer() {
         <li>
           <ToggleTimerButton
             onClick={() => setTimer({ ...timer, active: !timer.active })}
-            timer={timer}
+            pressed={timer.active}
           />
         </li>
         <li>
           <SkipButton onClick={handleNewTimer} />
         </li>
         <li>
-          <FullscreenButton />
+          <FullscreenButton
+            onClick={() =>
+              setTimer({
+                ...timer,
+                fullscreen: !timer.fullscreen,
+              })
+            }
+            pressed={timer.fullscreen}
+          />
         </li>
       </ul>
       <p>Pomodoro #{timer.pomodoroNumber}!</p>

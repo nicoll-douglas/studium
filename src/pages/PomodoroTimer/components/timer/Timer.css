@@ -1,5 +1,5 @@
 #timer-buttons button {
-  @apply w-full aspect-square border-2 border-LM-accent-light rounded-md flex items-center justify-center hover:border-LM-accent-dark dark:border-DM-accent-light dark:hover:border-DM-accent-dark transition-colors duration-200;
+  @apply w-full aspect-square border-2 border-LM-accent-light rounded-md flex items-center justify-center hover:border-LM-accent-dark dark:border-DM-accent-light dark:hover:border-DM-accent-dark transition-colors duration-200 xs:p-4;
 }
 
 #timer-buttons button[aria-pressed="true"] {
@@ -8,4 +8,31 @@
 
 #timer-buttons button svg {
   @apply fill-LM-neutral dark:fill-DM-neutral size-10 sm:size-12 xs:size-8;
+}
+
+.fullscreen {
+  min-height: calc(100% - 76px);
+  height: calc(100% - 76px);
+  @apply fixed left-0 w-full z-40 bg-LM-primary dark:bg-DM-primary top-[76px] pb-[76px] items-center justify-center p-4;
+}
+
+.fullscreen-button {
+  @apply fixed z-50 right-4 bottom-4 w-16 h-16 max-w-fit;
+}
+
+.fullscreen-buttons {
+  @apply fixed z-50 bottom-4 mx-auto max-w-fit;
+}
+
+.fullscreen #timer-buttons {
+  @apply max-w-fit sm:grid-cols-3 sm:grid-rows-2 mb-8;
+}
+
+.fullscreen div:first-of-type {
+  font-size: 160px;
+  @apply border-none sm:text-8xl h-fit mb-4;
+}
+
+.fullscreen button {
+  @apply size-16 max-w-16 aspect-square;
 }

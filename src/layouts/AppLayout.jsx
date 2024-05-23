@@ -5,7 +5,7 @@ export default function AppLayout() {
   return (
     <div className="w-full flex flex-grow">
       <nav
-        className="fixed top-[76px] left-0 z-10 bg-LM-primary dark:bg-DM-primary flex flex-col mb-8 col-span-3 border-r border-LM-accent-light dark:border-DM-accent-light sm:hidden pt-2"
+        className="fixed top-[76px] left-0 z-10 bg-LM-primary dark:bg-DM-primary flex flex-col mb-8 col-span-3 border-r border-LM-accent-light dark:border-DM-accent-light sm:hidden pt-2 overflow-y-auto"
         aria-label="App"
         style={{
           height: "calc(100% - 76px)",
