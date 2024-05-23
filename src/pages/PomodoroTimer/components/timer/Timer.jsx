@@ -77,7 +77,7 @@ export default function Timer() {
       </audio>
       <TimerDisplay timeLeft={timer.timeLeft} fullscreen={timer.fullscreen} />
       <ul
-        className={`w-full grid grid-cols-6 gap-3 lg:gap-2 xs:grid-cols-3 xs:grid-rows-2 xs:w-fit`}
+        className={`w-full grid grid-cols-6 gap-3 md:gap-2 xs:grid-cols-3 xs:grid-rows-2 xs:w-fit`}
         id="timer-buttons"
         aria-label="timer buttons"
       >
