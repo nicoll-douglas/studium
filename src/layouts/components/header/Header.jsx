@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 
 import Logo from "./components/Logo";
 import DarkModeButton from "./components/DarkModeButton";
 import MobileMenu from "./components/MobileMenu";
 
-export default function Header({ currentPage }) {
+export default function Header() {
   const headerRef = useRef(null);
+  const location = useLocation();
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (
@@ -19,7 +21,8 @@ export default function Header({ currentPage }) {
       }
     });
   }, []);
-  const isHomePage = currentPage === "/" || currentPage === "/home";
+
+  const isHomePage = location.pathname === "/" || location.pathname === "/home";
 
   return (
     <header

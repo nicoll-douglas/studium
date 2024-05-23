@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import MenuItem from "../../MenuItem";
+import MenuItem from "../../../../components/ui/MenuItem";
 import OpenMenuButton from "./OpenMenuButton";
 import CloseMenuButton from "./CloseMenuButton";
 
