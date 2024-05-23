@@ -1,4 +1,4 @@
-import MenuItem from "../../components/ui/MenuItem";
+import MenuItem from "./MenuItem";
 
 export default function SidebarMenu() {
   return (

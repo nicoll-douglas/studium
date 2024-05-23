@@ -26,7 +26,7 @@ export default function Header() {
 
   return (
     <header
-      className="shadow-none transition-shadow duration-700 ease-in-out flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-20 py-5"
+      className="shadow-none transition-shadow duration-700 ease-in-out flex px-8 lg:px-6 items-center sticky top-0 w-full bg-LM-primary dark:bg-DM-primary z-30 py-5"
       ref={headerRef}
     >
       <Logo />
