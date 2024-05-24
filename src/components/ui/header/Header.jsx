@@ -51,9 +51,6 @@ export default function Header() {
             <li>
               <Link to="/calculator">Calculator</Link>
             </li>
-            <li>
-              <Link to="/dictionary">Dictionary</Link>
-            </li>
           </ul>
         </nav>
       )}

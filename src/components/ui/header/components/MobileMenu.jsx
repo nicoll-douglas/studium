@@ -87,7 +87,6 @@ export default function MobileMenu({ display }) {
           <MenuItem variant="Bookmarks" role="menuitem" />
           <MenuItem variant="Pomodoro Timer" role="menuitem" />
           <MenuItem variant="Calculator" role="menuitem" />
-          <MenuItem variant="Dictionary" role="menuitem" />
         </ul>
       </section>
     </nav>

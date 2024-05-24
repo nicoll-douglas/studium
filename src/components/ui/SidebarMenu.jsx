@@ -16,7 +16,6 @@ export default function SidebarMenu() {
         <MenuItem variant="Bookmarks" role="listitem" />
         <MenuItem variant="Pomodoro Timer" role="listitem" />
         <MenuItem variant="Calculator" role="listitem" />
-        <MenuItem variant="Dictionary" role="listitem" />
       </ul>
     </nav>
   );

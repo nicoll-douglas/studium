@@ -36,7 +36,6 @@ function App() {
           <Route path="/notes" element={<Notes />} />
           <Route path="/to-do-list" element={<ToDoList />} />
           <Route path="/calculator" element={<Calculator />} />
-          <Route path="/dictionary" />
           <Route path="/pomodoro-timer" element={<PomodoroTimer />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
         </Route>

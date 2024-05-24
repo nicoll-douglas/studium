@@ -1,7 +1,6 @@
 export default function mapToTitle(pathname) {
   return {
     "/dashboard": "Dashboard",
-    "/dictionary": "Dictionary",
     "/calculator": "Calculator",
     "/pomodoro-timer": "Pomodoro Timer",
     "/bookmarks": "Bookmarks",
