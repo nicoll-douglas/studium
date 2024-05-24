@@ -41,7 +41,7 @@ export default function NoteItem({ operations, data }) {
   }
 
   function handleInput(e, type) {
-    const newData = { ...data };
+    const newData = { ...noteData };
     newData[type] = e.target.value;
     setNoteData(newData);
   }
