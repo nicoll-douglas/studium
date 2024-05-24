@@ -1,13 +1,29 @@
-import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import AddButton from "../../../components/ui/buttons/AddButton";
+import actions from "../../../hooks/useCRUD/actions";
 
-export default function ListInput({ createrCallback }) {
+import { useState } from "react";
+import PropTypes from "prop-types";
+
+ListInput.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default function ListInput({ dispatch }) {
   const [data, setData] = useState({ text: "" });
 
   function handleAdd() {
-    createrCallback({ text: data.text });
-    setData({ text: "" });
+    if (data.text) {
+      dispatch({
+        type: actions.create,
+        payload: data,
+      });
+      setData({ text: "" });
+    }
+  }
+
+  function handleInput(e) {
+    setData({ text: e.target.value });
   }
 
   return (
@@ -16,7 +32,7 @@ export default function ListInput({ createrCallback }) {
         type="data"
         minRows={1}
         value={data.text}
-        onInput={(e) => setData({ text: e.target.value })}
+        onInput={handleInput}
         className="bg-transparent p-4 pr-14 rounded-xl flex-grow resize-none"
         placeholder="Add a to do..."
         autoComplete="off"

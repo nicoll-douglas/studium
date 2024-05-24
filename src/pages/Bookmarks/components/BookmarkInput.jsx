@@ -1,17 +1,23 @@
 import { useState } from "react";
 import AddButton from "../../../components/ui/buttons/AddButton";
 import PropTypes from "prop-types";
+import actions from "../../../hooks/useCRUD/actions";
 
 BookmarkInput.propTypes = {
-  operations: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default function BookmarkInput({ operations }) {
+export default function BookmarkInput({ dispatch }) {
   const [data, setData] = useState({ name: "", URL: "" });
 
   function handleAdd() {
-    operations.create({ name: data.name, URL: data.URL, pinned: false });
-    setData({ name: "", URL: "" });
+    if (data.name || data.URL) {
+      dispatch({
+        type: actions.create,
+        payload: data,
+      });
+      setData({ name: "", URL: "" });
+    }
   }
 
   function handleInput(e, type) {

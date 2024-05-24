@@ -3,12 +3,13 @@ import AddButton from "../../../components/ui/buttons/AddButton";
 
 import { useState } from "react";
 import PropTypes from "prop-types";
+import actions from "../../../hooks/useCRUD/actions";
 
 NoteInput.propTypes = {
-  operations: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default function NoteInput({ operations }) {
+export default function NoteInput({ dispatch }) {
   const [data, setData] = useState({ text: "", title: "" });
 
   function handleInput(e, type) {
@@ -17,9 +18,14 @@ export default function NoteInput({ operations }) {
     setData(newData);
   }
 
-  function handleClick() {
-    operations.create(data);
-    setData({ text: "", title: "" });
+  function handleAdd() {
+    if (data.text || data.title) {
+      dispatch({
+        type: actions.create,
+        payload: data,
+      });
+      setData({ text: "", title: "" });
+    }
   }
 
   return (
@@ -30,6 +36,7 @@ export default function NoteInput({ operations }) {
           placeholder="Note title..."
           className="bg-transparent w-full text-lg"
           value={data.title}
+          spellCheck={false}
           onInput={(e) => handleInput(e, "title")}
         />
         <TextareaAutosize
@@ -37,10 +44,11 @@ export default function NoteInput({ operations }) {
           minRows={2}
           placeholder="Enter a note..."
           value={data.text}
+          spellCheck={false}
           onInput={(e) => handleInput(e, "text")}
         ></TextareaAutosize>
       </div>
-      <AddButton label="add note" onClick={handleClick} />
+      <AddButton label="add note" onClick={handleAdd} />
     </div>
   );
 }

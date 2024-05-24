@@ -3,37 +3,42 @@ import Container from "../../components/ui/Container";
 import BookmarkInput from "./components/BookmarkInput";
 import Bookmark from "./components/Bookmark";
 import NoBookmarks from "./components/NoBookmarks";
-import useCRUD from "../../hooks/useCRUD";
-import reorderList from "../../utils/reorderList";
+import useCRUD from "../../hooks/useCRUD/useCRUD";
 
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import {
   verticalListSortingStrategy,
   SortableContext,
 } from "@dnd-kit/sortable";
+import actions from "../../hooks/useCRUD/actions";
 
 export default function Bookmarks() {
-  const [bookmarks, setBookmarks, operations] = useCRUD("bookmarks");
+  const [bookmarks, dispatch] = useCRUD("bookmarks");
 
-  let rendered;
-  if (bookmarks.length === 0) {
-    rendered = <NoBookmarks />;
-  } else {
-    rendered = bookmarks.map((bookmark) => {
-      return (
-        <Bookmark key={bookmark.id} data={bookmark} operations={operations} />
-      );
+  function handleDragEnd(e) {
+    dispatch({
+      type: actions.swap,
+      payload: e,
     });
+  }
+
+  function getBookmarks() {
+    if (bookmarks.length === 0) {
+      return <NoBookmarks />;
+    } else {
+      return bookmarks.map((bookmark) => {
+        return (
+          <Bookmark key={bookmark.id} data={bookmark} dispatch={dispatch} />
+        );
+      });
+    }
   }
 
   return (
     <Container>
       <Heading variant="Bookmarks" />
-      <BookmarkInput operations={operations} />
-      <DndContext
-        collisionDetection={closestCorners}
-        onDragEnd={(e) => reorderList(e, bookmarks, setBookmarks)}
-      >
+      <BookmarkInput dispatch={dispatch} />
+      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
         <SortableContext
           items={bookmarks}
           strategy={verticalListSortingStrategy}
@@ -43,7 +48,7 @@ export default function Bookmarks() {
             id="to-do-list-items"
             aria-label="To do list"
           >
-            {rendered}
+            {getBookmarks()}
           </ul>
         </SortableContext>
       </DndContext>

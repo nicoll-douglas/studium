@@ -6,16 +6,23 @@ import DeleteButton from "../../../components/ui/buttons/DeleteButton";
 import { useEffect, useRef, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import PropTypes from "prop-types";
+import actions from "../../../hooks/useCRUD/actions";
 
 Bookmark.propTypes = {
-  operations: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
-export default function Bookmark({ operations, data }) {
+export default function Bookmark({ dispatch, data }) {
   const [bookmarkData, setBookmarkData] = useState(data);
   const [editing, setEditing] = useState(false);
   const bookmarkNameInputRef = useRef(null);
+
+  useEffect(() => {
+    if (editing) {
+      bookmarkNameInputRef.current.focus();
+    }
+  }, [editing]);
 
   const {
     listeners,
@@ -26,18 +33,24 @@ export default function Bookmark({ operations, data }) {
     transition,
   } = useSortable({ id: bookmarkData.id });
 
-  useEffect(() => {
-    if (editing) {
-      bookmarkNameInputRef.current.focus();
-    }
-  }, [editing]);
+  const nodeRefStyles = {
+    transition,
+    transform: transform ? `translate(${transform.x}px, ${transform.y}px)` : "",
+  };
 
   function handleSave() {
-    operations.update(bookmarkData.id, {
-      name: bookmarkData.name,
-      URL: bookmarkData.URL,
+    dispatch({
+      type: actions.update,
+      payload: bookmarkData,
     });
     setEditing(false);
+  }
+
+  function handleDelete() {
+    dispatch({
+      type: actions.delete,
+      payload: bookmarkData,
+    });
   }
 
   function handleInput(e, type) {
@@ -52,12 +65,7 @@ export default function Bookmark({ operations, data }) {
         isDragging ? "z-50" : "z-10"
       }`}
       ref={setNodeRef}
-      style={{
-        transition,
-        transform: transform
-          ? `translate(${transform.x}px, ${transform.y}px)`
-          : "",
-      }}
+      style={nodeRefStyles}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +88,7 @@ export default function Bookmark({ operations, data }) {
         <input
           value={bookmarkData.name}
           className="bg-transparent"
-          placeholder="Bookmark name..."
+          placeholder="Untitled..."
           ref={bookmarkNameInputRef}
           hidden={!editing}
           onInput={(e) => handleInput(e, "name")}
@@ -88,7 +96,7 @@ export default function Bookmark({ operations, data }) {
         <input
           value={bookmarkData.URL}
           className="bg-transparent text-LM-accent-light dark:text-DM-accent-light"
-          placeholder="Bookmark URL..."
+          placeholder="URL..."
           hidden={!editing}
           onInput={(e) => handleInput(e, "URL")}
         />
@@ -107,7 +115,7 @@ export default function Bookmark({ operations, data }) {
         <DeleteButton
           visible={false}
           visibilityTrigger="group-hover/bookmark:visible"
-          onClick={() => operations.remove(bookmarkData.id)}
+          onClick={handleDelete}
         />
         <DragButton
           ref={setActivatorNodeRef}

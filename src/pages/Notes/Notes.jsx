@@ -2,38 +2,43 @@ import Heading from "../../components/ui/Heading";
 import Container from "../../components/ui/Container";
 import NoteInput from "./components/NoteInput";
 import NoteItem from "./components/NoteItem";
-import reorderList from "../../utils/reorderList";
 import NoNotes from "./components/NoNotes";
-import useCRUD from "../../hooks/useCRUD";
+import useCRUD from "../../hooks/useCRUD/useCRUD";
+import actions from "../../hooks/useCRUD/actions";
 
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 
 export default function Notes() {
-  const [notes, setNotes, operations] = useCRUD("notes");
+  const [notes, dispatch] = useCRUD("notes");
 
-  let rendered;
-  if (notes.length === 0) {
-    rendered = <NoNotes />;
-  } else {
-    rendered = notes.map((note) => {
-      return <NoteItem data={note} key={note.id} operations={operations} />;
+  function handleDragEnd(e) {
+    dispatch({
+      type: actions.swap,
+      payload: e,
     });
+  }
+
+  function getRendered() {
+    if (notes.length === 0) {
+      return <NoNotes />;
+    } else {
+      return notes.map((note) => {
+        return <NoteItem data={note} key={note.id} dispatch={dispatch} />;
+      });
+    }
   }
 
   return (
     <>
       <Container>
         <Heading variant="Notes" />
-        <NoteInput operations={operations} />
+        <NoteInput dispatch={dispatch} />
       </Container>
-      <DndContext
-        collisionDetection={closestCenter}
-        onDragEnd={(e) => reorderList(e, notes, setNotes)}
-      >
+      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={notes}>
           <div className="w-full mt-8 grid grid-cols-3 gap-4 max-w-[1536px] xl:flex xl:flex-col xl:max-w-[500px] lg:max-w-[390px] sm:flex-grow sm:max-w-full mx-4 xl:px-0">
-            {rendered}
+            {getRendered()}
           </div>
         </SortableContext>
       </DndContext>
