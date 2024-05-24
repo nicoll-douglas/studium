@@ -18,6 +18,9 @@ export default {
         jost: ["Jost", "ui-sans-serif", "sans-serif"],
         "nanum-pen": ["Nanum Pen", "cursive"],
       },
+      spacing: {
+        19: "4.75rem",
+      },
     },
     screens: {
       "2xl": { max: "1536px" },

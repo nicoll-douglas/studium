@@ -58,7 +58,7 @@ export default function NoteItem({ operations, data }) {
       }}
     >
       <div
-        className={`group/note-item p-4 border-LM-accent-light dark:border-DM-accent-light border rounded-xl flex items-start gap-2 max-w-[500px] sm:max-w-full bg-LM-primary dark:bg-DM-primary ${
+        className={`group/note-item p-4 border-LM-accent-light dark:border-DM-accent-light border rounded-xl flex items-start gap-2 max-w-[500px] sm:max-w-full bg-LM-primary dark:bg-DM-primary shadow-lg ${
           modal ? "modal" : ""
         }`}
       >
