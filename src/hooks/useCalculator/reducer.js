@@ -20,6 +20,9 @@ export default function reducer(storage, action) {
         case "+":
           operation = (n1, n2) => n1 + n2;
           break;
+        case "%":
+          operation = (n1, n2) => n1 % n2;
+          break;
         case "\u2212":
           operation = (n1, n2) => n1 - n2;
           break;

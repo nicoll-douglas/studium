@@ -6,10 +6,10 @@ import SaveButton from "../../../components/ui/buttons/SaveButton";
 import actions from "../../../hooks/useCRUD/actions";
 import "./NoteItem.css";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
-import PropTypes from "prop-types";
 import { useSearchParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
 NoteItem.propTypes = {
   dispatch: PropTypes.func.isRequired,
