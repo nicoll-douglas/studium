@@ -11,7 +11,7 @@ export default function TimerDisplay({ timeLeft, fullscreen }) {
 
   return (
     <div
-      className={`w-full  flex items-center justify-center border-2 border-LM-accent-light dark:border-DM-accent-light rounded-2xl h-64 text-8xl xs:h-40 xs:text-7xl ${
+      className={`w-full flex items-center justify-center border border-LM-accent-light dark:border-DM-accent-light rounded-2xl h-64 text-8xl xs:h-40 xs:text-7xl ${
         fullscreen ? "" : "shadow-lg"
       }`}
     >

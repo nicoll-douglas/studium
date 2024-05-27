@@ -15,8 +15,8 @@ export default function Timer() {
     active: false,
     pomodoroNumber: 1,
     timeLeft: 25 * 60,
-    fullscreen: false,
   });
+  const [fullscreen, setFullscreen] = useState(false);
 
   const audioRef = useRef(null);
 
@@ -32,22 +32,21 @@ export default function Timer() {
     }
 
     setTimer({
-      fullscreen: timer.fullscreen,
       active: false,
       pomodoroNumber,
       minutes,
       timeLeft: minutes * 60,
     });
-  }, [timer.fullscreen, timer.pomodoroNumber, timer.minutes]);
+  }, [timer.pomodoroNumber, timer.minutes]);
 
   useEffect(() => {
-    if (timer.active) {
-      if (timer.timeLeft <= 0) {
-        audioRef.current.volume = 0.1;
-        audioRef.current.play();
-        handleNewTimer();
-        return;
-      }
+    if (!timer.active) return;
+
+    if (timer.timeLeft <= 0) {
+      audioRef.current.volume = 0.1;
+      audioRef.current.play();
+      handleNewTimer();
+    } else {
       const timeout = setTimeout(setTimer, 1000, {
         ...timer,
         timeLeft: timer.timeLeft - 1,
@@ -63,7 +62,7 @@ export default function Timer() {
   return (
     <section
       className={`flex flex-col gap-4 xs:items-center ${
-        timer.fullscreen ? "fullscreen" : "relative"
+        fullscreen ? "fullscreen" : "relative"
       }`}
       aria-label="timer"
     >
@@ -75,7 +74,7 @@ export default function Timer() {
           className="sr-only"
         />
       </audio>
-      <TimerDisplay timeLeft={timer.timeLeft} fullscreen={timer.fullscreen} />
+      <TimerDisplay timeLeft={timer.timeLeft} fullscreen={fullscreen} />
       <ul
         className={`w-full grid grid-cols-6 gap-3 lg:gap-2 xs:grid-cols-3 xs:grid-rows-2 xs:w-fit`}
         id="timer-buttons"
@@ -110,13 +109,8 @@ export default function Timer() {
         </li>
         <li>
           <FullscreenButton
-            onClick={() =>
-              setTimer({
-                ...timer,
-                fullscreen: !timer.fullscreen,
-              })
-            }
-            pressed={timer.fullscreen}
+            onClick={() => setFullscreen(!fullscreen)}
+            pressed={fullscreen}
           />
         </li>
       </ul>
