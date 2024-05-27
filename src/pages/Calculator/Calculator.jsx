@@ -1,64 +1,18 @@
 import Container from "../../components/ui/Container";
 import Heading from "../../components/ui/Heading";
-import NumberButton from "./components/buttons/NumberButton";
-import OperatorButton from "./components/buttons/OperatorButton";
+import NumberButton from "./components/NumberButton";
+import OperatorButton from "./components/OperatorButton";
 import CalculatorDisplay from "./components/CalculatorDisplay";
 import "./Calculator.css";
+import useCalculator from "../../hooks/useCalculator/useCalculator";
+import actions from "../../hooks/useCalculator/actions";
 
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
 export const StorageContext = createContext();
 
 export default function Calculator() {
-  const [storage, setStorage] = useState({
-    firstNumber: "",
-    operatorFunction: undefined,
-    running: "",
-    operation: "",
-  });
-
-  function handleSignChange() {
-    setStorage({
-      ...storage,
-      running:
-        storage.running.charAt(0) === "-"
-          ? storage.running.slice(1)
-          : `-${storage.running}`,
-    });
-  }
-
-  function handleEquals() {
-    if (!storage.running) return;
-    if (storage.operatorFunction) {
-      setStorage({
-        running: `${storage.operatorFunction(
-          +storage.firstNumber,
-          +storage.running
-        )}`,
-        firstNumber: "",
-        operation: "",
-        operatorFunction: null,
-      });
-    }
-  }
-
-  function handleAllClear() {
-    setStorage({
-      firstNumber: "",
-      operatorFunction: null,
-      running: "",
-      operator: "",
-    });
-  }
-
-  function handleDecimal() {
-    if (!storage.running.includes(".")) {
-      setStorage({
-        ...storage,
-        running: `${storage.running}.`,
-      });
-    }
-  }
+  const [storage, dispatch] = useCalculator();
 
   return (
     <Container>
@@ -68,18 +22,18 @@ export default function Calculator() {
           className="border rounded-2xl shadow-md p-4 flex flex-col gap-4 xs:gap-3 xs:p-3 border-LM-accent-light dark:border-DM-accent-light max-w-fit"
           id="calculator"
         >
-          <StorageContext.Provider value={[storage, setStorage]}>
-            <CalculatorDisplay
-              firstRow={storage.firstNumber}
-              operation={storage.operation}
-              secondRow={storage.running}
-            />
+          <StorageContext.Provider value={[storage, dispatch]}>
+            <CalculatorDisplay storage={storage} />
             <div
               className="grid grid-cols-4 gap-3 grid-rows-5 w-full xs:gap-2"
               aria-label="calculator buttons"
             >
-              <button onClick={handleAllClear}>AC</button>
-              <button onClick={handleSignChange}>+/-</button>
+              <button onClick={() => dispatch({ type: actions.clear })}>
+                AC
+              </button>
+              <button onClick={() => dispatch({ type: actions.signChange })}>
+                +/-
+              </button>
               <OperatorButton operation="%" />
               <OperatorButton operation={"\u00F7"} />
               <NumberButton number={7} />
@@ -95,8 +49,12 @@ export default function Calculator() {
               <NumberButton number={3} />
               <OperatorButton operation="+" />
               <NumberButton number={0} />
-              <button onClick={handleDecimal}>.</button>
-              <button onClick={handleEquals}>=</button>
+              <button onClick={() => dispatch({ type: actions.inputDecimal })}>
+                .
+              </button>
+              <button onClick={() => dispatch({ type: actions.operate })}>
+                =
+              </button>
             </div>
           </StorageContext.Provider>
         </div>

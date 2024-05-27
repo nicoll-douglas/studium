@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { StorageContext } from "../../Calculator";
+
+import { StorageContext } from "../Calculator";
+import actions from "../../../hooks/useCalculator/actions";
 
 NumberButton.propTypes = {
   number: PropTypes.oneOfType([
@@ -10,14 +12,10 @@ NumberButton.propTypes = {
 };
 
 export default function NumberButton({ number }) {
-  const [storage, setStorage] = useContext(StorageContext);
+  const [, dispatch] = useContext(StorageContext);
 
   function handleClick() {
-    if (+number === 0 && storage.running === "0") return;
-    setStorage({
-      ...storage,
-      running: `${storage.running === "0" ? "" : storage.running}${number}`,
-    });
+    dispatch({ type: actions.inputNumber, payload: { number } });
   }
 
   return (

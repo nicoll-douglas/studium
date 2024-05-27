@@ -1,20 +1,18 @@
 import PropTypes from "prop-types";
 
 CalculatorDisplay.propTypes = {
-  firstRow: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  secondRow: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  operation: PropTypes.string,
+  storage: PropTypes.object.isRequired,
 };
 
-export default function CalculatorDisplay({ firstRow, operation, secondRow }) {
+export default function CalculatorDisplay({ storage }) {
   return (
     <div
       className="border border-LM-accent-light dark:border-DM-accent-light shadow-inner h-44 rounded-md p-4 text-right flex flex-col justify-end items-end gap-1 flex-grow w-full"
       aria-live="polite"
     >
-      <div className="w-full break-words">{firstRow}</div>
-      <div className="w-full break-words">{operation}</div>
-      <div className="w-full break-words">{secondRow}</div>
+      <div className="w-full break-words">{storage.firstNumber}</div>
+      <div className="w-full break-words">{storage.operation}</div>
+      <div className="w-full break-words">{storage.running}</div>
     </div>
   );
 }
