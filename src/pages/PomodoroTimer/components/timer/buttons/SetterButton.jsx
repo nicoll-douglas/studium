@@ -1,18 +1,20 @@
 import PropTypes from "prop-types";
+import actions from "../../../../../hooks/useTimer/actions";
 
-PomodoroButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+SetterButton.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   pressed: PropTypes.bool.isRequired,
+  minutes: PropTypes.number.isRequired,
 };
 
-export default function PomodoroButton({ pressed, onClick }) {
-  return (
-    <button
-      title="Set 25 minute timer (Pomodoro)"
-      aria-label="pomodoro"
-      aria-pressed={pressed}
-      onClick={onClick}
-    >
+export default function SetterButton({ pressed, dispatch, minutes }) {
+  function handleClick() {
+    dispatch({ type: actions.set, payload: { minutes } });
+  }
+
+  function render() {
+    if (minutes === 5 || minutes === 15) return minutes;
+    return (
       <svg
         enableBackground="new 0 0 160 160"
         height="24"
@@ -24,6 +26,18 @@ export default function PomodoroButton({ pressed, onClick }) {
       >
         <path d="m45.586 126.377c4.581 4.041 9.916 7.193 15.859 9.369 5.907 2.158 12.16 3.254 18.585 3.254 6.434 0 12.688-1.096 18.587-3.254 5.941-2.173 11.277-5.325 15.859-9.369 4.617-4.076 8.229-8.841 10.729-14.164 2.517-5.354 3.792-11.037 3.792-16.891 0-5.852-1.275-11.533-3.791-16.889-2.503-5.322-6.114-10.088-10.732-14.165-1.856-1.639-5.918-4.771-11.522-6.573.87-.957 1.265-2.315.928-3.665-.534-2.143-2.705-3.447-4.853-2.91l-14.766 3.692c.496-4.934 1.701-9.738 3.606-14.334 2.571-6.205 6.296-11.769 11.069-16.539 1.563-1.562 1.563-4.094.002-5.657-1.562-1.563-4.094-1.563-5.656-.002-5.521 5.517-9.828 11.955-12.806 19.135-1.996 4.815-3.314 9.826-3.977 14.963l-14.099-10.578c-1.767-1.325-4.274-.968-5.6.8-1.325 1.767-.967 4.274.8 5.6l11.086 8.314c-1.011-.115-2.026-.187-3.045-.187-9.978 0-17.346 5.552-20.05 7.938-4.62 4.073-8.231 8.84-10.735 14.167-2.516 5.354-3.792 11.036-3.792 16.892.002 5.855 1.277 11.537 3.791 16.889 2.506 5.329 6.117 10.096 10.731 14.164zm-3.49-44.541c2.036-4.331 4.992-8.224 8.787-11.571 2.023-1.785 7.511-5.938 14.758-5.938 4.074 0 8.158 1.346 12.14 4 1.344.896 3.094.896 4.438 0 3.982-2.654 8.072-4 12.158-4 7.495 0 13.227 4.545 14.805 5.938 3.797 3.35 6.752 7.243 8.787 11.57 2.011 4.282 3.031 8.819 3.031 13.487 0 4.669-1.02 9.207-3.032 13.488-2.034 4.328-4.989 8.219-8.784 11.567-3.832 3.383-8.311 6.024-13.313 7.854-5.017 1.837-10.348 2.769-15.84 2.769-5.485 0-10.814-.932-15.837-2.768-5.004-1.832-9.484-4.476-13.316-7.854-3.791-3.343-6.747-7.235-8.784-11.567-2.009-4.276-3.029-8.815-3.031-13.487 0-4.67 1.02-9.207 3.033-13.488z" />
       </svg>
+    );
+  }
+
+  return (
+    <button
+      aria-label={`Set ${minutes} minute timer`}
+      title={minutes === 25 ? "Pomodoro" : ""}
+      aria-pressed={pressed}
+      onClick={handleClick}
+      className="text-3xl lg:text-2xl"
+    >
+      {render()}
     </button>
   );
 }
