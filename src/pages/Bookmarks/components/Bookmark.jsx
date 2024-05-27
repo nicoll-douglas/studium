@@ -61,7 +61,7 @@ export default function Bookmark({ dispatch, data }) {
 
   return (
     <li
-      className={`rounded-md max-w-full text-wrap flex relative px-4 py-1 items-start group/bookmark bg-LM-primary dark:bg-DM-primary ${
+      className={`rounded-md gap-2 max-w-full text-wrap flex relative px-4 py-1 items-start group/bookmark bg-LM-primary dark:bg-DM-primary ${
         isDragging ? "z-50" : "z-10"
       }`}
       ref={setNodeRef}
@@ -72,15 +72,20 @@ export default function Bookmark({ dispatch, data }) {
         height="24px"
         viewBox="0 -960 960 960"
         width="24px"
-        className="fill-LM-accent-light dark:fill-DM-accent-light"
+        className="fill-LM-accent-light dark:fill-DM-accent-light min-w-6"
       >
         <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
       </svg>
-      <div className="flex flex-col flex-grow gap-2 ml-3">
+      <div
+        className={`flex flex-col flex-grow gap-2 ${
+          editing ? "" : "overflow-hidden"
+        }`}
+      >
         <a
           href={bookmarkData.URL}
-          hidden={editing}
-          className="max-w-fit"
+          className={` max-w-fit text-nowrap text-ellipsis overflow-hidden ${
+            editing ? "hidden" : "block"
+          }`}
           target="_blank"
         >
           {bookmarkData.name}
@@ -101,7 +106,7 @@ export default function Bookmark({ dispatch, data }) {
           onInput={(e) => handleInput(e, "URL")}
         />
       </div>
-      <div className="flex gap-1 ml-2">
+      <div className="flex gap-1">
         <EditButton
           hidden={editing}
           visibilityTrigger="group-hover/bookmark:visible"

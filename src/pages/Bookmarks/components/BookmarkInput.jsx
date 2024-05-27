@@ -27,8 +27,8 @@ export default function BookmarkInput({ dispatch }) {
   }
 
   return (
-    <div className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative">
-      <div className="p-4 pr-14 rounded-xl flex-grow flex flex-col gap-2">
+    <div className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative p-4">
+      <div className="rounded-xl flex-grow flex flex-col gap-2">
         <input
           value={data.name}
           type="text"

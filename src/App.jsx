@@ -12,6 +12,7 @@ import Notes from "./pages/Notes/Notes";
 import Bookmarks from "./pages/Bookmarks/Bookmarks";
 import PomodoroTimer from "./pages/PomodoroTimer/PomodoroTimer";
 import Calculator from "./pages/Calculator/Calculator";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   const location = useLocation();
@@ -32,7 +33,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="*" element={<ErrorPage />} />
         <Route element={<AppLayout />}>
-          <Route path="/dashboard" />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/to-do-list" element={<ToDoList />} />
           <Route path="/calculator" element={<Calculator />} />

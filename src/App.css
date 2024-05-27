@@ -17,3 +17,20 @@ nav a.active {
 nav a.active svg {
   @apply fill-LM-accent-light dark:fill-DM-accent-light;
 }
+
+textarea,
+input {
+  @apply outline-offset-1;
+}
+
+::-webkit-scrollbar {
+  @apply size-1;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-LM-primary dark:bg-DM-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-LM-accent-light dark:bg-DM-accent-light hover:bg-LM-accent-dark dark:hover:bg-DM-accent-dark rounded-full transition-colors duration-150;
+}

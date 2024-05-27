@@ -7,11 +7,7 @@ AddButton.propTypes = {
 
 export default function AddButton({ onClick, label }) {
   return (
-    <button
-      className="absolute right-0 mx-4 group mt-4"
-      onClick={onClick}
-      aria-label={label}
-    >
+    <button className="group" onClick={onClick} aria-label={label}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"

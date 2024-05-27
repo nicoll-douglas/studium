@@ -3,12 +3,13 @@ import DragButton from "../../../components/ui/buttons/DragButton";
 import DeleteButton from "../../../components/ui/buttons/DeleteButton";
 import EditButton from "../../../components/ui/buttons/EditButton";
 import SaveButton from "../../../components/ui/buttons/SaveButton";
+import actions from "../../../hooks/useCRUD/actions";
 import "./NoteItem.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import PropTypes from "prop-types";
-import actions from "../../../hooks/useCRUD/actions";
+import { useSearchParams } from "react-router-dom";
 
 NoteItem.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -16,8 +17,11 @@ NoteItem.propTypes = {
 };
 
 export default function NoteItem({ dispatch, data }) {
-  const [modal, setModal] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [noteData, setNoteData] = useState(data);
+  const [modal, setModal] = useState(
+    searchParams.get("editing") === noteData.id
+  );
 
   const {
     listeners,
@@ -46,7 +50,13 @@ export default function NoteItem({ dispatch, data }) {
       type: actions.update,
       payload: noteData,
     });
+    setSearchParams({});
     setModal(false);
+  }
+
+  function handleEdit() {
+    setSearchParams({ editing: noteData.id });
+    setModal(true);
   }
 
   function handleInput(e, type) {
@@ -96,7 +106,7 @@ export default function NoteItem({ dispatch, data }) {
           />
           <EditButton
             visibilityTrigger="group-hover/note-item:visible"
-            onClick={() => setModal(true)}
+            onClick={handleEdit}
             hidden={modal}
           />
           <DeleteButton
