@@ -10,6 +10,8 @@ export default function mapToTitle(pathname) {
       return "Bookmarks";
     case "/to-do-list":
       return "To Do List";
+    case "/notes":
+      return "Notes";
     default:
       return "The home of your on the fly study needs";
   }
