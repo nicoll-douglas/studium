@@ -1,11 +1,11 @@
 import actions from "./actions";
-
-const maxInput = 25;
+import Decimal from "decimal.js";
 
 export default function reducer(storage, action) {
+  const maxLength = storage.running.length > 25;
   switch (action.type) {
     case actions.signChange: {
-      if (storage.running.length > 25) return storage;
+      if (maxLength) return storage;
       return {
         ...storage,
         running:
@@ -18,23 +18,22 @@ export default function reducer(storage, action) {
     case actions.operate: {
       if (!storage.running || !storage.operation) return storage;
 
-      let operation;
-      switch (storage.operation) {
-        case "+":
-          operation = (n1, n2) => n1 + n2;
-          break;
-        case "%":
-          operation = (n1, n2) => n1 % n2;
-          break;
-        case "\u2212":
-          operation = (n1, n2) => n1 - n2;
-          break;
-        case "\u00D7":
-          operation = (n1, n2) => n1 * n2;
-          break;
-        default:
-          operation = (n1, n2) => n1 / n2;
-      }
+      let operation = (n1, n2) => {
+        switch (storage.operation) {
+          case "+":
+            return new Decimal(n1).plus(new Decimal(n2));
+          case "%":
+            return new Decimal(n1).mod(new Decimal(n2));
+          case "\u2212":
+            return new Decimal(n1).minus(new Decimal(n2));
+          case "\u00D7":
+            return new Decimal(n1).times(new Decimal(n2));
+          case "\u00F7":
+            return new Decimal(n1).div(new Decimal(n2));
+          default:
+            throw new Error("storage.operation contains invalid operation");
+        }
+      };
 
       return {
         running: `${operation(+storage.firstNumber, +storage.running)}`,
@@ -52,7 +51,7 @@ export default function reducer(storage, action) {
     }
 
     case actions.inputDecimal: {
-      if (storage.running.length > 25) return storage;
+      if (maxLength) return storage;
       if (storage.running.includes(".")) return storage;
       return {
         ...storage,
@@ -61,7 +60,7 @@ export default function reducer(storage, action) {
     }
 
     case actions.inputNumber: {
-      if (storage.running.length > 25) return storage;
+      if (maxLength) return storage;
 
       const number = action.payload.number;
       if (+number === 0 && storage.running === "0") return storage;
