@@ -6,9 +6,19 @@ EditButton.propTypes = {
   hidden: PropTypes.bool.isRequired,
 };
 
-export default function EditButton({ visibilityTrigger, onClick, hidden }) {
+export default function EditButton({
+  visibilityTrigger,
+  onClick,
+  hidden,
+  ...rest
+}) {
   return (
-    <button className={hidden ? "hidden" : "group"} onClick={onClick}>
+    <button
+      className={hidden ? "hidden" : "group"}
+      onClick={onClick}
+      aria-label="edit"
+      {...rest}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24px"

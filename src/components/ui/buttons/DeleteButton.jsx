@@ -6,9 +6,14 @@ DeleteButton.propTypes = {
   visible: PropTypes.bool.isRequired,
 };
 
-export default function DeleteButton({ onClick, visibilityTrigger, visible }) {
+export default function DeleteButton({
+  onClick,
+  visibilityTrigger,
+  visible,
+  ...rest
+}) {
   return (
-    <button className="group" onClick={onClick}>
+    <button className="group" onClick={onClick} aria-label="delete" {...rest}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24px"

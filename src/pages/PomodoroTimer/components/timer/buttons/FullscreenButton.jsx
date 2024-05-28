@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
+import { forwardRef } from "react";
 
-FullscreenButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  pressed: PropTypes.bool.isRequired,
-};
-
-export default function FullscreenButton({ onClick, pressed }) {
+const FullscreenButton = forwardRef(({ onClick, pressed }, ref) => {
   return (
-    <button title="Toggle fullscreen" aria-pressed={pressed} onClick={onClick}>
+    <button
+      title="Toggle fullscreen"
+      aria-pressed={pressed}
+      onClick={onClick}
+      aria-controls="pomodoro-timer"
+      ref={ref}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"
@@ -30,4 +32,11 @@ export default function FullscreenButton({ onClick, pressed }) {
       </svg>
     </button>
   );
-}
+});
+
+FullscreenButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  pressed: PropTypes.bool.isRequired,
+};
+FullscreenButton.displayName = "FullscreenButton";
+export default FullscreenButton;

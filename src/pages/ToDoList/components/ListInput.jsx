@@ -2,8 +2,9 @@ import TextareaAutosize from "react-textarea-autosize";
 import AddButton from "../../../components/ui/buttons/AddButton";
 import actions from "../../../hooks/useCRUD/actions";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import { SRContext } from "../../../layouts/AppLayout";
 
 ListInput.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -11,6 +12,7 @@ ListInput.propTypes = {
 
 export default function ListInput({ dispatch }) {
   const [data, setData] = useState({ text: "" });
+  const setLiveRegion = useContext(SRContext);
 
   function handleAdd() {
     if (data.text) {
@@ -18,7 +20,10 @@ export default function ListInput({ dispatch }) {
         type: actions.create,
         payload: data,
       });
+      setLiveRegion(`Sucessfuly added ${data.text} to to do list`);
       setData({ text: "" });
+    } else {
+      setLiveRegion("To do list input empty, nothing added");
     }
   }
 
@@ -27,7 +32,10 @@ export default function ListInput({ dispatch }) {
   }
 
   return (
-    <div className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative p-4">
+    <section
+      className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative p-4"
+      aria-label="List item creation"
+    >
       <TextareaAutosize
         type="data"
         minRows={1}
@@ -44,7 +52,7 @@ export default function ListInput({ dispatch }) {
           }
         }}
       ></TextareaAutosize>
-      <AddButton onClick={handleAdd} label="add item to list" />
-    </div>
+      <AddButton onClick={handleAdd} aria-label="Add item to list" />
+    </section>
   );
 }

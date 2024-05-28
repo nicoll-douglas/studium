@@ -10,6 +10,7 @@ export default function ToggleInfoButton({ onClick, expanded }) {
     <button
       className="group"
       aria-controls="about-pomodoro"
+      aria-label="Toggle information"
       aria-expanded={expanded}
       onClick={onClick}
     >

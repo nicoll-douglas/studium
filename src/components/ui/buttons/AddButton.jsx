@@ -2,12 +2,11 @@ import PropTypes from "prop-types";
 
 AddButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
 };
 
-export default function AddButton({ onClick, label }) {
+export default function AddButton({ onClick, ...rest }) {
   return (
-    <button className="group" onClick={onClick} aria-label={label}>
+    <button className="group" onClick={onClick} {...rest}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"

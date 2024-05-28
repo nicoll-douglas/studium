@@ -11,7 +11,11 @@
 }
 
 .fullscreen {
-  @apply fixed left-0 w-full z-50 bg-LM-primary dark:bg-DM-primary top-0 h-full items-center justify-center p-4 overflow-y-auto;
+  @apply mx-auto z-50 bg-LM-primary dark:bg-DM-primary items-center justify-center p-4 overflow-y-auto;
+}
+
+.fullscreen::backdrop {
+  @apply bg-LM-primary dark:bg-DM-primary opacity-100;
 }
 
 .fullscreen-button {

@@ -6,7 +6,7 @@ InfoParagraph.propTypes = {
 
 export default function InfoParagraph({ hidden }) {
   return (
-    <section hidden={hidden}>
+    <section hidden={hidden} id="about-pomodoro">
       <p className="mb-4">
         The Pomodoro Technique is a time management method developed by
         Francesco Cirillo in the late 1980s. It uses a kitchen timer to break

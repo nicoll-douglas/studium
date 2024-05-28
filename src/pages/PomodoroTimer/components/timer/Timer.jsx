@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import "./Timer.css";
 import SetterButton from "./buttons/SetterButton";
@@ -11,23 +11,45 @@ import { TimerContext } from "../../../../layouts/AppLayout";
 export default function Timer() {
   const [timer, dispatch, getDisplay] = useContext(TimerContext);
   const [fullscreen, setFullscreen] = useState(false);
+  const dialogRef = useRef(null);
+  const fullscreenButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (fullscreen) {
+      dialogRef.current.showModal();
+      fullscreenButtonRef.current.focus();
+    } else {
+      dialogRef.current.close();
+    }
+  }, [fullscreen]);
+
+  function handleEscape(e) {
+    if (e.key === "Escape") setFullscreen(false);
+  }
 
   return (
-    <section
-      className={`flex flex-col gap-4 xs:items-center ${
-        fullscreen ? "fullscreen" : "relative"
+    <dialog
+      className={`flex flex-col gap-4 xs:items-center justify-center min-w-full w-full text-LM-neutral dark:text-DM-neutral bg-LM-primary dark:bg-DM-primary px-1 ${
+        fullscreen ? "fullscreen" : "relative m-0"
       }`}
-      aria-label="timer"
+      ref={dialogRef}
+      aria-modal={fullscreen}
+      id="pomodoro-timer"
+      onKeyDown={handleEscape}
+      aria-label="Pomodoro Timer"
     >
       <div
-        className={`w-full flex items-center justify-center border border-LM-accent-light dark:border-DM-accent-light rounded-2xl h-64 text-8xl xs:h-40 xs:text-7xl ${
-          fullscreen ? "" : "shadow-lg"
+        className={`w-full flex items-center justify-center border border-LM-accent-light dark:border-DM-accent-light rounded-2xl ${
+          fullscreen
+            ? "h-40 xs:h-32 text-9xl xs:text-8xl"
+            : "shadow-lg h-64 xs:h-40 text-8xl xs:text-7xl"
         }`}
+        role="timer"
       >
-        <div>{getDisplay()}</div>
+        {getDisplay()}
       </div>
       <ul
-        className={`w-full grid grid-cols-6 gap-3 lg:gap-2 xs:grid-cols-3 xs:grid-rows-2 xs:w-fit`}
+        className={`w-full grid grid-rows-1 grid-cols-6 gap-3 lg:gap-2 xs:grid-cols-3 xs:grid-rows-2 xs:w-fit`}
         id="timer-buttons"
         aria-label="timer buttons"
       >
@@ -65,10 +87,11 @@ export default function Timer() {
           <FullscreenButton
             onClick={() => setFullscreen(!fullscreen)}
             pressed={fullscreen}
+            ref={fullscreenButtonRef}
           />
         </li>
       </ul>
       <p>Pomodoro #{timer.pomodoroNumber}!</p>
-    </section>
+    </dialog>
   );
 }

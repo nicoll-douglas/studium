@@ -15,7 +15,7 @@ export default function NotesPreview() {
       return <NoItems>You currently have no notes</NoItems>;
     } else {
       return (
-        <ul className="flex gap-2 flex-col overflow-y-auto mt-4 pr-4">
+        <ul className="flex gap-2 flex-col overflow-y-auto p-1 mt-4">
           {notes.map((note) => {
             return (
               <li
@@ -24,7 +24,8 @@ export default function NotesPreview() {
               >
                 <Link
                   to={`/notes?editing=${note.id}`}
-                  className="min-w-full flex p-4 gap-2 justify-between"
+                  className="min-w-full flex p-4 gap-2 justify-between rounded-lg"
+                  title="Go to note"
                 >
                   <div className="text-ellipsis text-nowrap overflow-hidden">
                     {note.title}

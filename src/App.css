@@ -32,5 +32,9 @@ input {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-LM-accent-light dark:bg-DM-accent-light hover:bg-LM-accent-dark dark:hover:bg-DM-accent-dark rounded-full transition-colors duration-150;
+  @apply bg-LM-accent-light dark:bg-DM-accent-light hover:bg-LM-accent-dark dark:hover:bg-DM-accent-dark rounded-full;
+}
+
+::backdrop {
+  @apply bg-black opacity-75;
 }

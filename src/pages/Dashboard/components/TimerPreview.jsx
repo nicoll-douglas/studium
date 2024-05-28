@@ -16,8 +16,11 @@ export default function TimerPreview() {
         className="gap-4 w-full h-full flex flex-col items-center justify-center text-center"
         id="timer-preview"
       >
-        <div>{`Pomodoro #${timer.pomodoroNumber}!`}</div>
-        <div className="text-8xl md:text-7xl sm:text-8xl xs:text-7xl">
+        <h2>{`Pomodoro #${timer.pomodoroNumber}!`}</h2>
+        <div
+          className="text-8xl md:text-7xl sm:text-8xl xs:text-7xl"
+          role="timer"
+        >
           {getDisplay()}
         </div>
         <div className="flex gap-2">

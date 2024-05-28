@@ -1,8 +1,11 @@
 import actions from "./actions";
 
+const maxInput = 25;
+
 export default function reducer(storage, action) {
   switch (action.type) {
     case actions.signChange: {
+      if (storage.running.length > 25) return storage;
       return {
         ...storage,
         running:
@@ -49,6 +52,7 @@ export default function reducer(storage, action) {
     }
 
     case actions.inputDecimal: {
+      if (storage.running.length > 25) return storage;
       if (storage.running.includes(".")) return storage;
       return {
         ...storage,
@@ -57,6 +61,8 @@ export default function reducer(storage, action) {
     }
 
     case actions.inputNumber: {
+      if (storage.running.length > 25) return storage;
+
       const number = action.payload.number;
       if (+number === 0 && storage.running === "0") return storage;
       return {
@@ -71,7 +77,7 @@ export default function reducer(storage, action) {
         operation: action.payload.operation,
       };
 
-      if (storage.firstNumber) return storage;
+      if (storage.firstNumber) return newStorage;
 
       if (storage.running) {
         newStorage.firstNumber = storage.running;

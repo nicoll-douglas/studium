@@ -44,9 +44,8 @@ export default function Bookmarks() {
           strategy={verticalListSortingStrategy}
         >
           <ul
-            className="border border-LM-accent-light dark:border-DM-accent-light py-4 rounded-xl shadow-lg max-w-full flex-col"
-            id="to-do-list-items"
-            aria-label="To do list"
+            className="border border-LM-accent-light dark:border-DM-accent-light py-4 rounded-xl shadow-lg max-w-full flex flex-col"
+            aria-label="Bookmarks"
           >
             {getBookmarks()}
           </ul>

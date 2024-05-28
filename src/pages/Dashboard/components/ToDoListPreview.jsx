@@ -11,12 +11,17 @@ export default function ToDolistPreview() {
       return <NoItems>You currently have no to-dos</NoItems>;
     } else {
       return (
-        <ul className="mt-4 flex flex-col gap-2 overflow-y-auto">
+        <ul className="mt-4 flex flex-col gap-2 overflow-y-auto p-1">
           {list.map((listElement) => {
             return (
               <li className="flex gap-2" key={listElement.id}>
-                <CompleteButton payload={listElement} dispatch={dispatch} />
-                {listElement.text}
+                <CompleteButton
+                  listItemData={listElement}
+                  dispatch={dispatch}
+                />
+                <span id={listElement.id} className="break-all">
+                  {listElement.text}
+                </span>
               </li>
             );
           })}

@@ -18,9 +18,5 @@ export default function NumberButton({ number }) {
     dispatch({ type: actions.inputNumber, payload: { number } });
   }
 
-  return (
-    <button onClick={handleClick} className={+number === 0 ? "col-span-2" : ""}>
-      {number}
-    </button>
-  );
+  return <button onClick={handleClick}>{number}</button>;
 }

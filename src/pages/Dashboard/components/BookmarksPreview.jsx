@@ -13,7 +13,7 @@ export default function BookmarksPreview() {
       return <NoItems>You have no bookmarks</NoItems>;
     } else {
       return (
-        <ul className="w-full mt-4 overflow-y-auto flex flex-col gap-2">
+        <ul className="w-full mt-4 overflow-y-auto flex flex-col gap-2 p-1">
           {bookmarks.map((bookmark) => {
             return (
               <li key={bookmark.id} className="flex gap-2">
@@ -22,6 +22,7 @@ export default function BookmarksPreview() {
                   height="24px"
                   viewBox="0 -960 960 960"
                   width="24px"
+                  aria-hidden="true"
                   className="fill-LM-accent-light dark:fill-DM-accent-light min-w-6"
                 >
                   <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
@@ -29,7 +30,7 @@ export default function BookmarksPreview() {
                 <a
                   href={bookmark.URL}
                   target="_blank"
-                  className="blocko text-ellipsis text-nowrap overflow-hidden"
+                  className="block text-ellipsis text-nowrap overflow-x-hidden"
                 >
                   {bookmark.name}
                 </a>

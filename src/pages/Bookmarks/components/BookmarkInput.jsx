@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddButton from "../../../components/ui/buttons/AddButton";
 import PropTypes from "prop-types";
 import actions from "../../../hooks/useCRUD/actions";
+import { SRContext } from "../../../layouts/AppLayout";
 
 BookmarkInput.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -9,6 +10,7 @@ BookmarkInput.propTypes = {
 
 export default function BookmarkInput({ dispatch }) {
   const [data, setData] = useState({ name: "", URL: "" });
+  const setLiveRegion = useContext(SRContext);
 
   function handleAdd() {
     if (data.name || data.URL) {
@@ -17,6 +19,9 @@ export default function BookmarkInput({ dispatch }) {
         payload: data,
       });
       setData({ name: "", URL: "" });
+      setLiveRegion(`Successfully added ${data.name} bookmark`);
+    } else {
+      setLiveRegion("Both input fields empty, nothing added");
     }
   }
 
@@ -27,7 +32,10 @@ export default function BookmarkInput({ dispatch }) {
   }
 
   return (
-    <div className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative p-4">
+    <section
+      className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative p-4"
+      aria-label="Bookmark creation"
+    >
       <div className="rounded-xl flex-grow flex flex-col gap-2">
         <input
           value={data.name}
@@ -44,7 +52,7 @@ export default function BookmarkInput({ dispatch }) {
           onInput={(e) => handleInput(e, "URL")}
         />
       </div>
-      <AddButton label="add note" onClick={handleAdd} />
-    </div>
+      <AddButton aria-label="Add bookmark" onClick={handleAdd} />
+    </section>
   );
 }

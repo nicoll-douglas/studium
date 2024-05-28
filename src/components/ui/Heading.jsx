@@ -11,7 +11,10 @@ export default function Heading({ variant, title }) {
 
   return (
     <h1 className="flex gap-2 text-lg items-center text-LM-accent-light dark:text-DM-accent-light">
-      <SVGComponent className="fill-LM-accent-light dark:fill-DM-accent-light" />
+      <SVGComponent
+        className="fill-LM-accent-light dark:fill-DM-accent-light"
+        aria-hidden="true"
+      />
       {title ? title : variant}
     </h1>
   );

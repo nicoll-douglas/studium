@@ -67,7 +67,7 @@ export default function MobileMenu({ display }) {
       ></div>
       <OpenMenuButton onClick={handleToggle} expanded={menu.open} />
       <section
-        className={`fixed w-dvw top-0 left-0 z-50 bg-LM-primary dark:bg-DM-primary drop-shadow-2xl rounded-b-3xl flex-col max-h-dvh overflow-y-scroll ${
+        className={`fixed w-dvw top-0 left-0 z-50 bg-LM-primary dark:bg-DM-primary drop-shadow-2xl rounded-b-3xl flex-col max-h-dvh overflow-y-auto ${
           !menu.open ? "-translate-y-full" : ""
         }`}
         role="menu"

@@ -24,38 +24,78 @@ export default function Calculator() {
         >
           <StorageContext.Provider value={[storage, dispatch]}>
             <CalculatorDisplay storage={storage} />
-            <div
+            <ul
               className="grid grid-cols-4 gap-3 grid-rows-5 w-full xs:gap-2"
               aria-label="calculator buttons"
             >
-              <button onClick={() => dispatch({ type: actions.clear })}>
-                AC
-              </button>
-              <button onClick={() => dispatch({ type: actions.signChange })}>
-                +/-
-              </button>
-              <OperatorButton operation="%" />
-              <OperatorButton operation={"\u00F7"} />
-              <NumberButton number={7} />
-              <NumberButton number={8} />
-              <NumberButton number={9} />
-              <OperatorButton operation={"\u00D7"} />
-              <NumberButton number={4} />
-              <NumberButton number={5} />
-              <NumberButton number={6} />
-              <OperatorButton operation={"\u2212"} />
-              <NumberButton number={1} />
-              <NumberButton number={2} />
-              <NumberButton number={3} />
-              <OperatorButton operation="+" />
-              <NumberButton number={0} />
-              <button onClick={() => dispatch({ type: actions.inputDecimal })}>
-                .
-              </button>
-              <button onClick={() => dispatch({ type: actions.operate })}>
-                =
-              </button>
-            </div>
+              <li>
+                <button onClick={() => dispatch({ type: actions.clear })}>
+                  AC
+                </button>
+              </li>
+              <li>
+                <button onClick={() => dispatch({ type: actions.signChange })}>
+                  +/-
+                </button>
+              </li>
+              <li>
+                <OperatorButton operation="%" />
+              </li>
+              <li>
+                <OperatorButton operation={"\u00F7"} />
+              </li>
+              <li>
+                <NumberButton number={7} />
+              </li>
+              <li>
+                <NumberButton number={8} />
+              </li>
+              <li>
+                <NumberButton number={9} />
+              </li>
+              <li>
+                <OperatorButton operation={"\u00D7"} />
+              </li>
+              <li>
+                <NumberButton number={4} />
+              </li>
+              <li>
+                <NumberButton number={5} />
+              </li>
+              <li>
+                <NumberButton number={6} />
+              </li>
+              <li>
+                <OperatorButton operation={"\u2212"} />
+              </li>
+              <li>
+                <NumberButton number={1} />
+              </li>
+              <li>
+                <NumberButton number={2} />
+              </li>
+              <li>
+                <NumberButton number={3} />
+              </li>
+              <li>
+                <OperatorButton operation="+" />
+              </li>
+              <li className="col-span-2">
+                <NumberButton number={0} />
+              </li>
+              <li>
+                <button
+                  onClick={() => dispatch({ type: actions.inputDecimal })}
+                >
+                  .
+                </button>
+              </li>
+              <li>
+                <button onClick={() => dispatch({ type: actions.operate })}>
+                  =
+                </button>
+              </li>
+            </ul>
           </StorageContext.Provider>
         </div>
       </div>

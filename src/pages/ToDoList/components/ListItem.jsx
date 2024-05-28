@@ -2,6 +2,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import DragButton from "../../../components/ui/buttons/DragButton";
 import actions from "../../../hooks/useCRUD/actions";
 import CompleteButton from "./CompleteButton";
+import { SRContext } from "../../../layouts/AppLayout";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { useCallback, useEffect, useState } from "react";
@@ -50,13 +51,14 @@ export default function ListItem({ data, dispatch }) {
       ref={setNodeRef}
       style={nodeRefStyles}
     >
-      <CompleteButton dispatch={dispatch} payload={listItemData} />
+      <CompleteButton dispatch={dispatch} listItemData={listItemData} />
       <TextareaAutosize
         className="bg-transparent ml-3 flex-grow cursor-text resize-none break-words mr-2"
         value={listItemData.text}
         minRows={1}
         onInput={handleInput}
         spellCheck={false}
+        id={listItemData.id}
         placeholder="Empty to do..."
         onKeyDown={(e) => {
           if (e.key === "Enter") {

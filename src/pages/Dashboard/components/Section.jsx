@@ -10,11 +10,12 @@ Section.propTypes = {
 
 export default function Section({ variant, title, children }) {
   return (
-    <section className="col-span-1 row-span-1 min-w-full max-w-[500px] border border-LM-accent-light dark:border-DM-accent-light rounded-xl lg:h-[300px] min-h-[250px] p-6 relative flex flex-col md:p-4 sm:p-6 xs:p-4 max-h-[375px] shadow-lg">
-      <div className="flex justify-between">
+    <section className="col-span-1 row-span-1 min-w-full max-w-[500px] border border-LM-accent-light dark:border-DM-accent-light rounded-xl lg:h-[300px] min-h-[250px] p-5 relative flex flex-col md:p-3 sm:p-5 xs:p-3 h-[350px] shadow-lg">
+      <header className="flex justify-between">
         <Heading variant={variant} title={title} />
         <Link
           className="group -mr-2 flex items-center justify-center"
+          aria-label={`Go to ${variant} app`}
           to={`/${variant
             .split(" ")
             .map((word) => word.toLowerCase())
@@ -31,7 +32,7 @@ export default function Section({ variant, title, children }) {
             <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
           </svg>
         </Link>
-      </div>
+      </header>
       {children}
     </section>
   );
