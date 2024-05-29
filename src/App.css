@@ -38,3 +38,7 @@ input {
 ::backdrop {
   @apply bg-black opacity-75;
 }
+
+* {
+  touch-action: manipulation;
+}

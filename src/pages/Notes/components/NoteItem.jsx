@@ -79,7 +79,7 @@ export default function NoteItem({ dispatch, data }) {
 
   return (
     <div
-      className={`${isDragging ? "z-50" : ""} bg-transparent`}
+      className={`${isDragging ? "z-50 opacity-50" : ""} bg-transparent`}
       ref={setNodeRef}
       style={nodeRefStyles}
     >

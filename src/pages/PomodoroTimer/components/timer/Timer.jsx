@@ -42,7 +42,7 @@ export default function Timer() {
         className={`w-full flex items-center justify-center border border-LM-accent-light dark:border-DM-accent-light rounded-2xl ${
           fullscreen
             ? "h-40 xs:h-32 text-9xl xs:text-8xl"
-            : "shadow-lg h-64 xs:h-40 text-8xl xs:text-7xl"
+            : "h-64 xs:h-40 text-8xl xs:text-7xl"
         }`}
         role="timer"
       >

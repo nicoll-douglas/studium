@@ -10,7 +10,7 @@ Section.propTypes = {
 
 export default function Section({ variant, title, children }) {
   return (
-    <section className="col-span-1 row-span-1 min-w-full max-w-[500px] border border-LM-accent-light dark:border-DM-accent-light rounded-xl lg:h-[300px] min-h-[250px] p-5 relative flex flex-col md:p-3 sm:p-5 xs:p-3 h-[350px] shadow-lg">
+    <section className="col-span-1 row-span-1 min-w-full max-w-[500px] border border-LM-accent-light dark:border-DM-accent-light rounded-xl lg:h-[300px] min-h-[250px] p-5 relative flex flex-col md:p-3 sm:p-5 xs:p-4 h-[350px]">
       <header className="flex justify-between">
         <Heading variant={variant} title={title} />
         <Link

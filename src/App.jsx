@@ -14,6 +14,8 @@ import PomodoroTimer from "./pages/PomodoroTimer/PomodoroTimer";
 import Calculator from "./pages/Calculator/Calculator";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
+// Note to self: Need to learn how to test so I can test this codebase monstrosity
+
 function App() {
   const location = useLocation();
 

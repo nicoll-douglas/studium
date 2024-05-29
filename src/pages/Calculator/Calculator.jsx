@@ -19,7 +19,7 @@ export default function Calculator() {
       <div className="gap-4 flex flex-col mx-auto">
         <Heading variant="Calculator" />
         <div
-          className="border rounded-2xl shadow-md p-4 flex flex-col gap-4 xs:gap-3 xs:p-3 border-LM-accent-light dark:border-DM-accent-light max-w-fit"
+          className="border rounded-2xl p-4 flex flex-col gap-4 xs:gap-3 xs:p-3 border-LM-accent-light dark:border-DM-accent-light max-w-fit"
           id="calculator"
         >
           <StorageContext.Provider value={[storage, dispatch]}>

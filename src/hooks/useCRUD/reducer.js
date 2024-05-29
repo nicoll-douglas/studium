@@ -18,6 +18,7 @@ export default function reducer(database, action) {
     }
     case actions.swap: {
       const { active, over } = action.payload;
+      if (!active || !over) return database;
       if (active.id === over.id) return database;
       const originalPos = database.findIndex((item) => item.id === active.id);
       const newPos = database.findIndex((item) => item.id === over.id);

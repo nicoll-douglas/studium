@@ -7,7 +7,7 @@ CalculatorDisplay.propTypes = {
 export default function CalculatorDisplay({ storage }) {
   return (
     <div
-      className="border border-LM-accent-light dark:border-DM-accent-light shadow-inner h-44 rounded-md p-4 text-right flex flex-col justify-end items-end gap-1 flex-grow w-full"
+      className="border border-LM-accent-light dark:border-DM-accent-light h-44 rounded-md p-4 text-right flex flex-col justify-end items-end gap-1 flex-grow w-full"
       aria-live="polite"
       aria-atomic="true"
     >

@@ -13,13 +13,18 @@ export default function DeleteButton({
   ...rest
 }) {
   return (
-    <button className="group" onClick={onClick} aria-label="delete" {...rest}>
+    <button
+      className="group md:block"
+      onClick={onClick}
+      aria-label="delete"
+      {...rest}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24px"
         viewBox="0 -960 960 960"
         width="24px"
-        className={`fill-LM-accent-light dark:fill-DM-accent-light group-hover:fill-LM-accent-dark dark:group-hover:fill-DM-accent-dark group-focus-visible:visible ${visibilityTrigger} ${
+        className={`fill-LM-accent-light dark:fill-DM-accent-light group-hover:fill-LM-accent-dark dark:group-hover:fill-DM-accent-dark group-focus-visible:visible md:visible ${visibilityTrigger} ${
           visible ? "visible" : "invisible"
         }`}
       >

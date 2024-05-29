@@ -35,7 +35,7 @@ export default function NoteInput({ dispatch }) {
 
   return (
     <section
-      className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light shadow-lg rounded-xl flex gap-4 items-start space-between max-w-full relative p-4"
+      className="bg-LM-primary dark:bg-DM-primary border border-LM-accent-light dark:border-DM-accent-light rounded-xl flex gap-4 items-start space-between max-w-full relative p-4"
       aria-label="Note creation"
     >
       <div className="rounded-xl flex-grow flex flex-col gap-2">

@@ -2,7 +2,6 @@ import TextareaAutosize from "react-textarea-autosize";
 import DragButton from "../../../components/ui/buttons/DragButton";
 import actions from "../../../hooks/useCRUD/actions";
 import CompleteButton from "./CompleteButton";
-import { SRContext } from "../../../layouts/AppLayout";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { useCallback, useEffect, useState } from "react";
@@ -46,7 +45,7 @@ export default function ListItem({ data, dispatch }) {
   return (
     <li
       className={`rounded-md max-w-full text-wrap flex relative px-4 py-1 items-start group/list-item bg-LM-primary dark:bg-DM-primary ${
-        isDragging ? "z-50 shadow-2xl" : "z-10"
+        isDragging ? "z-50 opacity-50" : ""
       }`}
       ref={setNodeRef}
       style={nodeRefStyles}

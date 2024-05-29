@@ -1,5 +1,5 @@
 #timer-preview button {
-  @apply w-full aspect-square border border-LM-accent-light rounded-md flex items-center justify-center hover:border-LM-accent-dark shadow-lg dark:border-DM-accent-light dark:hover:border-DM-accent-dark transition-colors duration-200 p-4 sm:p-2;
+  @apply w-full aspect-square border border-LM-accent-light rounded-md flex items-center justify-center hover:border-LM-accent-dark  dark:border-DM-accent-light dark:hover:border-DM-accent-dark transition-colors duration-200 p-4 sm:p-2;
 }
 
 #timer-preview button[aria-pressed="true"] {

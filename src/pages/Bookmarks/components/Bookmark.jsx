@@ -8,6 +8,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import PropTypes from "prop-types";
 import actions from "../../../hooks/useCRUD/actions";
+import { CSS } from "@dnd-kit/utilities";
 
 Bookmark.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -33,11 +34,12 @@ export default function Bookmark({ dispatch, data }) {
     setActivatorNodeRef,
     isDragging,
     transition,
+    attributes,
   } = useSortable({ id: bookmarkData.id });
 
   const nodeRefStyles = {
     transition,
-    transform: transform ? `translate(${transform.x}px, ${transform.y}px)` : "",
+    transform: transform ? CSS.Transform.toString(transform) : "",
   };
 
   function handleSave() {
@@ -65,7 +67,7 @@ export default function Bookmark({ dispatch, data }) {
   return (
     <li
       className={`rounded-md max-w-full text-wrap flex px-4 py-1 items-start group/bookmark bg-LM-primary dark:bg-DM-primary ${
-        isDragging ? "z-50" : "z-10"
+        isDragging ? "z-50 opacity-50" : ""
       }`}
       ref={setNodeRef}
       style={nodeRefStyles}
@@ -140,6 +142,7 @@ export default function Bookmark({ dispatch, data }) {
           visibilityTrigger="group-hover/bookmark:visible"
           hidden={false}
           {...listeners}
+          {...attributes}
         />
       </div>
     </li>
