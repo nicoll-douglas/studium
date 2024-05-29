@@ -14,7 +14,21 @@ import PomodoroTimer from "./pages/PomodoroTimer/PomodoroTimer";
 import Calculator from "./pages/Calculator/Calculator";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
-// Note to self: Need to learn how to test so I can test this codebase monstrosity
+/* 
+  NOTES TO SELF:
+    Sensors & DnD
+    - Keyboard sensor activated with space or enter on drag handle
+    - Works fine normally and dragging is keyboard accessible
+    - There is a bug when using NVDA where dragging doesn't work
+    - Space and enter key press events don't dispatch key down events
+    - Therefore dnd-kit not detecting it as a valid event to initiate drag start and activate sensors
+    - Might just be a screen reader thing
+    - Have a look again at DnD accessibility 
+
+    Testing:
+    - Application is untested
+    - Would be good exercise to test this application when learn how to test
+*/
 
 function App() {
   const location = useLocation();
